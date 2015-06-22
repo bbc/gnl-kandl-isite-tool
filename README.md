@@ -36,7 +36,7 @@ to go through the proxy.
 
 Change to the application directory
 
-    $ cd /mnt/hgfs/workspace/kandlcurriculum/isite2/scripts/sync-data-with-form
+    $ cd /mnt/hgfs/workspace/kandl-migration-script
 
 
 ## Dependencies
@@ -50,7 +50,7 @@ You'll need to run
 
 Firstly change to the application directory:
 
-    $ cd /mnt/hgfs/workspace/kandlcurriculum/isite2/scripts/sync-data-with-form
+    $ cd /mnt/hgfs/workspace/kandl-migration-script
 
 There are actually two scripts associated with this task, but both scripts have
 the following command line options:
