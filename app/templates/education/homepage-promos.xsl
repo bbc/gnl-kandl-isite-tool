@@ -15,4 +15,6 @@
             <xsl:apply-templates select="node()|@*" />
         </xsl:copy>
     </xsl:template>
+
+    <xsl:template match="//bs:level-of-study" />
 </xsl:stylesheet>
