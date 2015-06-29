@@ -66,7 +66,7 @@ the following command line options:
 
 To download Study Guide list files from the test environment:
 
-    $ ruby -I. ./app/download.rb -e test -p education -f sg-study-guide-list
+    $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list
 
 This will:
 - download all the Study Guide lists from the test environment, in both
