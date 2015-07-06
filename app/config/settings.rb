@@ -4,6 +4,7 @@ module Settings
   @filetype = nil;
   @environment = nil;
   @project = nil;
+  @xslpath = '';
   @threads = 20;
   @pemFile = '/etc/pki/klunified.pem';
   @proxyHost = nil;
@@ -30,6 +31,10 @@ module Settings
     @project=v;
   end
 
+  def self.xslpath=(v)
+    @xslpath=v
+  end
+
   def self.threads=(v)
     @threads=v;
   end
@@ -48,6 +53,10 @@ module Settings
 
   def self.project
     return @project;
+  end
+
+  def self.xslpath
+    return @xslpath
   end
 
   def self.threads
@@ -155,6 +164,10 @@ optparse = OptionParser.new do |opts|
 
   opts.on("-f", "--filetype FILETYPE", "The iSite2 file type to update") do |filetype|
     Settings.filetype = filetype
+  end
+
+  opts.on('-x', '--xslpath PATH TO XSL', "Path of the XSL file to use for transforms") do |xslpath|
+    Settings.xslpath = xslpath
   end
 
   opts.on('-t', '--threads NUMBER', Integer, "The number of threads to use (default #{Settings.threads})") do |threads|
