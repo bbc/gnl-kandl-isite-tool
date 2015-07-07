@@ -4,7 +4,7 @@ module Settings
   @filetype = nil;
   @environment = nil;
   @project = nil;
-  @xslpath = '';
+  @xslpath = nil;
   @threads = 20;
   @pemFile = '/etc/pki/klunified.pem';
   @proxyHost = nil;
@@ -182,7 +182,7 @@ end
 
 begin
   optparse.parse!
-  mandatory = ['environment', 'project', 'filetype'];
+  mandatory = ['environment', 'project', 'filetype', 'xslpath'];
   # Enforce the presence of the -e, -p and -f switches
   missing = mandatory.select{ |param| Settings.module_eval(param).nil? }
   unless missing.empty?
