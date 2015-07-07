@@ -34,7 +34,7 @@ to go through the proxy.
 
 ## Location
 
-Change to the application directory
+On your sandbox, change to the application directory
 
     $ cd /mnt/hgfs/workspace/kandl-migration-script
 
@@ -48,7 +48,7 @@ You'll need to run
 
 ## Running the Script
 
-Firstly change to the application directory:
+First change to the application directory on your sandbox:
 
     $ cd /mnt/hgfs/workspace/kandl-migration-script
 
@@ -58,6 +58,7 @@ the following command line options:
     $ -e, --environment ENVIRONMENT    The environment to update
     $ -p, --project PROJECT            The iSite2 project to query
     $ -f, --filetype FILETYPE          The iSite2 file type to update
+    $ -x, --xslpath PATH TO XSL        Path of the XSL file to use for transforms
     $ -t, --threads NUMBER             The number of threads to use (default 20)
     $ -h, --help                       Display this screen
 
@@ -66,12 +67,12 @@ the following command line options:
 
 To download Study Guide list files from the test environment:
 
-    $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list
+    $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list -x path/to/study-guide-list.xsl
 
 This will:
 - download all the Study Guide lists from the test environment, in both
 the 'published' and 'in progress' states,
-- update the data using the approppriate XSLT
+- update the data using the provided XSLT
 - place the new content in a directory for upload
 
 
@@ -80,24 +81,3 @@ the 'published' and 'in progress' states,
 To upload the amended Study Guide list files to the test environment:
 
     $ ruby -I. ./app/upload.rb -e test -p education -f sg-study-guide-list
-
-
-## The Templates
-
-There are XML and XSLT files located in the templates directory:
-
-    $ cd app/templates
-
-Each file is named after the iSite2 'File type Id', in the admin section.
-
-#### The XML Template
-
-The XML file is present to show how the XML was structured when the XSLT was
-created. Then if the XML is changed, the new XML can be added in and it'll
-highlight what changes need to be made in the XSLT.
-
-#### The XSL Template
-
-The XSLT files are self explanatory. If creating a new XSLT then do look at how
-the existing XSLT documents are setting their namespaces.
-
