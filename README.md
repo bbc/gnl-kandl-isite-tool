@@ -1,10 +1,5 @@
-Curriculum
-===============
-
-http://bbc.co.uk/education
-
-https://production.bbc.co.uk/isite2/p/education
-
+K&L iSite2 XML Data Migrator
+============================
 
 ## Background
 
