@@ -11,10 +11,6 @@ class Transform
         puts "Preparing to transform documents..."
         puts "================================================="
 
-        if xslFile.empty?
-            xslFile = "./app/templates/#{Settings.project}/#{Settings.filetype}.xsl";
-        end
-
         if not File.exists? xslFile
             $stderr.puts " => ERROR: File '#{xslFile}' does not exist."
             exit 1
