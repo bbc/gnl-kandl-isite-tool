@@ -79,7 +79,7 @@ To upload the amended Study Guide list files to the test environment:
 
 ## Tests
 
-To run run the tests:
+To run the tests:
 ```
 $ rspec
 ```
