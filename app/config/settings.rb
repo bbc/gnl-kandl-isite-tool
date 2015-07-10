@@ -13,8 +13,8 @@ module Settings
   def self.setProxy()
     if File.exist? '/var/tmp/reithproxies'
       if File.read('/var/tmp/reithproxies').include? 'on'
-          @proxyHost = 'www-cache.reith.bbc.co.uk';
-          @proxyPort = 80;
+        @proxyHost = 'www-cache.reith.bbc.co.uk';
+        @proxyPort = 80;
       end
     end
   end
@@ -150,57 +150,52 @@ module Settings
         self.environment
     );
   end
-
-  def self.parseOptions
-    optparse = OptionParser.new do |opts|
-      opts.on("-e", "--environment ENVIRONMENT", "The environment to update") do |environment|
-        self.environment = environment
-      end
-
-      opts.on("-p", "--project PROJECT", "The iSite2 project to query") do |project|
-        self.project = project
-      end
-
-      opts.on("-f", "--filetype FILETYPE", "The iSite2 file type to update") do |filetype|
-        self.filetype = filetype
-      end
-
-      opts.on('-x', '--xslpath PATH TO XSL', "Path of the XSL file to use for transforms") do |xslpath|
-        self.xslpath = xslpath
-      end
-
-      opts.on('-t', '--threads NUMBER', Integer, "The number of threads to use (default #{Settings.threads})") do |threads|
-        self.threads = threads
-      end
-
-      opts.on('-h', '--help', 'Display this screen') do
-        puts opts
-        exit
-      end
-    end
-
-    begin
-      optparse.parse!
-      mandatory = ['environment', 'project', 'filetype', 'xslpath'];
-      # Enforce the presence of the -e, -p and -f switches
-      missing = mandatory.select{ |param| Settings.module_eval(param).nil? }
-      unless missing.empty?
-        puts "Missing options: #{missing.join(', ')}"
-        puts optparse
-        exit
-      end
-    rescue OptionParser::InvalidOption, OptionParser::MissingArgument
-      # Friendly output when parsing fails
-      puts $!.to_s
-      puts optparse
-      exit
-    end
-  end
-
 end
 
 
+optparse = OptionParser.new do |opts|
+  opts.on("-e", "--environment ENVIRONMENT", "The environment to update") do |environment|
+    Settings.environment = environment
+  end
 
+  opts.on("-p", "--project PROJECT", "The iSite2 project to query") do |project|
+    Settings.project = project
+  end
+
+  opts.on("-f", "--filetype FILETYPE", "The iSite2 file type to update") do |filetype|
+    Settings.filetype = filetype
+  end
+
+  opts.on('-x', '--xslpath PATH TO XSL', "Path of the XSL file to use for transforms") do |xslpath|
+    Settings.xslpath = xslpath
+  end
+
+  opts.on('-t', '--threads NUMBER', Integer, "The number of threads to use (default #{Settings.threads})") do |threads|
+    Settings.threads = threads
+  end
+
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+end
+
+begin
+  optparse.parse!
+  mandatory = ['environment', 'project', 'filetype', 'xslpath'];
+  # Enforce the presence of the -e, -p and -f switches
+  missing = mandatory.select{ |param| Settings.module_eval(param).nil? }
+  unless missing.empty?
+    puts "Missing options: #{missing.join(', ')}"
+    puts optparse
+    exit
+  end
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  # Friendly output when parsing fails
+  puts $!.to_s
+  puts optparse
+  exit
+end
 
 # automatically pick up the reithproxy settings from the sandbox
 Settings.setProxy();

@@ -23,8 +23,6 @@ require_relative 'lib/isite2/publish'
 #
 require_relative 'lib/transform'
 
-Settings.parseOptions
-
 # Retrieve a list of guids from iSite2 for the filetype we're targetting
 listFiles = ListContent.new;
 iSiteGUIDs = listFiles.extractGUIDs();

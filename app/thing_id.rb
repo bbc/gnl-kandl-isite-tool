@@ -24,8 +24,6 @@ require_relative 'lib/education/thing_id'
 require_relative 'lib/transform'
 
 
-Settings.parseOptions
-
 topicOfStudyXPath = nil;
 thingIdXPath = nil;
 

@@ -10,8 +10,6 @@ require_relative 'config/settings.rb'
 #
 require_relative 'lib/file-handler'
 
-Settings.parseOptions
-
 # If the downloaded file and the transformed file are the same then there's
 # no point in re-uploading the file
 Dir.glob("#{Settings.data}/updated/**/*.xml") do |updatedFile|
