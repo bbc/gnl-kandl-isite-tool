@@ -16,7 +16,7 @@ describe 'Applying XSLT' do
   end
 
   it 'should not fail the hudson job' do
-      expect(true).to eq(true)
+      expect(true).to eq(false)
   end
 end
 
