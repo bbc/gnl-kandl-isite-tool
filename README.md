@@ -76,3 +76,10 @@ the 'published' and 'in progress' states,
 To upload the amended Study Guide list files to the test environment:
 
     $ ruby -I. ./app/upload.rb -e test -p education -f sg-study-guide-list
+
+## Tests
+
+To run the tests:
+```
+$ rspec
+```

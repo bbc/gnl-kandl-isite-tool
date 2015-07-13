@@ -19,7 +19,6 @@ require_relative 'lib/isite2/publish'
 require_relative 'lib/isite2/unpublish'
 require_relative 'lib/isite2/upload'
 
-
 # Send up the files that need to be published first
 uploadFiles = UploadContent.new();
 uploadFiles.process("#{Settings.data}/upload/live/*.xml")

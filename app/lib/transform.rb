@@ -2,7 +2,7 @@
 # -*- encoding : utf-8 -*-
 require 'nokogiri';
 
-require_relative '../file-handler'
+require_relative 'file-handler'
 
 class Transform
     attr_reader :xsl

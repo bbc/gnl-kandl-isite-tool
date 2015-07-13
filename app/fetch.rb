@@ -21,8 +21,7 @@ require_relative 'lib/isite2/upload'
 require_relative 'lib/isite2/publish'
 
 #
-require_relative 'lib/education/transform'
-
+require_relative 'lib/transform'
 
 # Retrieve a list of guids from iSite2 for the filetype we're targetting
 listFiles = ListContent.new;

@@ -21,9 +21,8 @@ require_relative 'lib/isite2/upload'
 require_relative 'lib/isite2/publish'
 
 #
-require_relative 'lib/education/transform'
+require_relative 'lib/transform'
 require_relative 'lib/education/thing_id'
-
 
 byGuideId = {}
 byTopicOfstudyId = {}
