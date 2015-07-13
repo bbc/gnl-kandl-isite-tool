@@ -15,8 +15,8 @@ describe 'Applying XSLT' do
     expect(handler.asString).to eq("<?xml version=\"1.0\"?>\n<p>hey</p>")
   end
 
-  it 'should fail the hudson job' do
-      expect(true).to eq(false)
+  it 'should not fail the hudson job' do
+      expect(true).to eq(true)
   end
 end
 
