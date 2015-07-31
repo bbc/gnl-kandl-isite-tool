@@ -6,6 +6,7 @@ module Settings
     @project = nil;
     @xslpath = nil;
     @threads = 20;
+    @input = nil;
     @pemFile = '/etc/pki/klunified.pem';
     @proxyHost = nil;
     @proxyPort = nil;
@@ -39,6 +40,14 @@ module Settings
         @threads=v;
     end
 
+    def self.inputpath=(v)
+        @inputpath = v;
+    end
+
+    def self.outputpath=(v)
+        @outputpath = v;
+    end
+
     def self.pemFile=(v)
         @pemFile=File.read(v);
     end
@@ -61,6 +70,14 @@ module Settings
 
     def self.threads
         return @threads;
+    end
+
+    def self.inputpath
+        return @inputpath
+    end
+
+    def self.outputpath
+        return @outputpath
     end
 
     def self.pemFile
@@ -174,6 +191,14 @@ optparse = OptionParser.new do |opts|
         Settings.threads = threads
     end
 
+    opts.on('-i', '--inputpath INPUTPATH', "Path to files in") do |inputpath|
+        Settings.inputpath = inputpath
+    end
+
+    opts.on('-o', '--output OUTPUTPATH', "Output path") do |outputpath|
+        Settings.outputpath = outputpath
+    end
+
     opts.on('-h', '--help', 'Display this screen') do
         puts opts
         exit
@@ -182,7 +207,8 @@ end
 
 begin
     optparse.parse!
-    mandatory = ['environment', 'project', 'filetype', 'xslpath'];
+    # mandatory = ['environment', 'project', 'filetype', 'xslpath']; //TODO
+    mandatory = [];
     # Enforce the presence of the -e, -p and -f switches
     missing = mandatory.select { |param| Settings.module_eval(param).nil? }
     unless missing.empty?
