@@ -28,8 +28,8 @@ def applyTransform(inPath, outPath, xslFile)
     puts "Transformed XML output path: #{outPath}"
 end
 
-if File.directory? Settings.xslpath
-    # If xslpath is directory, apply all transforms in directory
+# Apply a series of XSL transforms <xslFile> to all XML documents in <inPath> and place output in <outPath>
+def applyTransforms()
     sortedXslFiles = Dir.glob("#{Settings.xslpath}/*.xsl").sort
 
     inPath = "#{Settings.inputpath}"
@@ -45,7 +45,14 @@ if File.directory? Settings.xslpath
     puts "Moving XML from #{outPath} to #{Settings.outputpath} and deleting #{outPath}"
     FileUtils.mv(Dir.glob("#{outPath}/*.xml"), Settings.outputpath);
     FileUtils.remove_dir(outPath);
-else
-    # xslpath is single xsl
-    applyTransform Settings.inputpath, Settings.outputpath, Settings.xslpath
 end
+
+def applyTransformOrTransforms()
+    if File.directory? Settings.xslpath
+        applyTransforms()
+    else
+        applyTransform Settings.inputpath, Settings.outputpath, Settings.xslpath
+    end
+end
+
+applyTransformOrTransforms()
