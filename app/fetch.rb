@@ -43,18 +43,3 @@ filterFiles.extractLiveDocuments(
 filterFiles.extractInProgressDocuments(
     "#{Settings.data}/extracted/in-progress/:guid.xml"
 );
-
-# Apply the XSL to each XML document
-tc = Transform.new(Settings.xslpath);
-
-# Update the 'Live' documents
-tc.update(
-    "#{Settings.data}/extracted/live/*.xml",
-    "#{Settings.data}/transformed/live/:guid.xml",
-);
-
-# Update the 'In-Progress' documents
-tc.update(
-    "#{Settings.data}/extracted/in-progress/*.xml",
-    "#{Settings.data}/transformed/in-progress/:guid.xml",
-);
