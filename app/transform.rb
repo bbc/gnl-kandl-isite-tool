@@ -14,11 +14,37 @@ require_relative 'lib/xml-handler'
 #
 require_relative 'lib/transform'
 
-# Apply the XSL to each XML document
-tc = Transform.new(Settings.xslpath);
+# Apply XSL transform <xslFile> to all XML documents in <inPath> and place output in <outPath>
+def applyTransform(inPath, outPath, xslFile)
+    puts "Applying #{xslFile} to XML in #{inPath}"
 
-# Update the 'Live' documents
-tc.update(
-    "#{Settings.inputpath}/*.xml",
-    "#{Settings.outputpath}/:guid.xml",
-);
+    tc = Transform.new(xslFile);
+
+    tc.update(
+        "#{inPath}/*.xml",
+        "#{outPath}/:guid.xml",
+    );
+
+    puts "Transformed XML output path: #{outPath}"
+end
+
+if File.directory? Settings.xslpath
+    # If xslpath is directory, apply all transforms in directory
+    sortedXslFiles = Dir.glob("#{Settings.xslpath}*.xsl").sort
+
+    inPath = "#{Settings.inputpath}"
+    outPath = ""
+
+    sortedXslFiles.each do |xslFile|
+        outPath = "#{Settings.outputpath}/#{File.basename(xslFile, '.xsl')}-out"
+        applyTransform inPath, outPath, xslFile
+        inPath = outPath
+    end
+
+    # Move all output from last transform into #{Settings.outputpath} and remove dir
+    FileUtils.mv(Dir.glob("#{outPath}/*.xml"), Settings.outputpath);
+    FileUtils.remove_dir(outPath);
+else
+    # xslpath is single xsl
+    applyTransform Settings.inputpath, Settings.outputpath, Settings.xslpath
+end
