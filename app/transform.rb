@@ -30,7 +30,7 @@ end
 
 if File.directory? Settings.xslpath
     # If xslpath is directory, apply all transforms in directory
-    sortedXslFiles = Dir.glob("#{Settings.xslpath}*.xsl").sort
+    sortedXslFiles = Dir.glob("#{Settings.xslpath}/*.xsl").sort
 
     inPath = "#{Settings.inputpath}"
     outPath = ""
@@ -42,6 +42,7 @@ if File.directory? Settings.xslpath
     end
 
     # Move all output from last transform into #{Settings.outputpath} and remove dir
+    puts "Moving XML from #{outPath} to #{Settings.outputpath} and deleting #{outPath}"
     FileUtils.mv(Dir.glob("#{outPath}/*.xml"), Settings.outputpath);
     FileUtils.remove_dir(outPath);
 else
