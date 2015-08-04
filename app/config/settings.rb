@@ -183,7 +183,7 @@ optparse = OptionParser.new do |opts|
         Settings.filetype = filetype
     end
 
-    opts.on('-x', '--xslpath PATH TO XSL', "Path of the XSL file to use for transforms") do |xslpath|
+    opts.on('-x', '--xslpath PATH TO XSL', "Path of the XSL file(s) to use for transforms") do |xslpath|
         Settings.xslpath = xslpath
     end
 

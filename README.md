@@ -50,32 +50,61 @@ First change to the application directory on your sandbox:
 There are actually two scripts associated with this task, but both scripts have
 the following command line options:
 
-    $ -e, --environment ENVIRONMENT    The environment to update
-    $ -p, --project PROJECT            The iSite2 project to query
-    $ -f, --filetype FILETYPE          The iSite2 file type to update
-    $ -x, --xslpath PATH TO XSL        Path of the XSL file to use for transforms
-    $ -t, --threads NUMBER             The number of threads to use (default 20)
-    $ -h, --help                       Display this screen
+    -e, --environment ENVIRONMENT    The environment to update
+    -p, --project PROJECT            The iSite2 project to query
+    -f, --filetype FILETYPE          The iSite2 file type to update
+    -x, --xslpath PATH TO XSL        Path of the XSL file(s) to use for transforms
+    -t, --threads NUMBER             The number of threads to use (default 20)
+    -i, --inputpath INPUTPATH        Path containing XML documents to transform
+    -o, --output OUTPUTPATH          Output path for transformed XML documents
+    -h, --help                       Display this screen
 
 
 #### Download
 
 To download Study Guide list files from the test environment:
 
-    $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list -x path/to/study-guide-list.xsl
+    $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list
 
 This will:
 - download all the Study Guide lists from the test environment, in both
 the 'published' and 'in progress' states,
-- update the data using the provided XSLT
 - place the new content in a directory for upload
 
+Required arguments: environment, project, filetype
+
+#### Download and apply transform(s)
+
+To download Study Guide list files from the test environment:
+
+    $ ruby -I. ./app/fetch-and-transform.rb -e test -p education -f sg-study-guide-list -x path/to/study-guide-list.xsl
+
+This will:
+- download all the Study Guide lists from the test environment, in both
+the 'published' and 'in progress' states,
+- update the data using the provided XSLT(s). If the path is a directory, all XSL transforms in directory will be applied in alphanumerically sorted order.
+- place the new content in a directory for upload
+
+Required arguments: environment, project, filetype, xslpath
+
+#### Apply transform(s)
+
+To apply one or more transforms to a directory containing XML documents:
+
+    $ ruby -I. ./app/transform.rb -i path/to/xml/documents/ -o output/path/ -x path/to/transforms/
+
+This will:
+- update the data using the provided XSLT(s). If the path is a directory, all XSL transforms in directory will be applied in alphanumerically sorted order.
+
+Required arguments: inputpath, outputpath, xslpath
 
 #### Upload
 
 To upload the amended Study Guide list files to the test environment:
 
     $ ruby -I. ./app/upload.rb -e test -p education -f sg-study-guide-list
+
+Required arguments: environment, project, filetype
 
 ## Tests
 
