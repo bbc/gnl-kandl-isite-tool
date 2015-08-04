@@ -20,9 +20,6 @@ require_relative 'lib/isite2/delete'
 require_relative 'lib/isite2/upload'
 require_relative 'lib/isite2/publish'
 
-#
-require_relative 'lib/transform'
-
 # Retrieve a list of guids from iSite2 for the filetype we're targetting
 listFiles = ListContent.new;
 iSiteGUIDs = listFiles.extractGUIDs();
@@ -42,19 +39,4 @@ filterFiles.extractLiveDocuments(
 );
 filterFiles.extractInProgressDocuments(
     "#{Settings.data}/extracted/in-progress/:guid.xml"
-);
-
-# Apply the XSL to each XML document
-tc = Transform.new(Settings.xslpath);
-
-# Update the 'Live' documents
-tc.update(
-    "#{Settings.data}/extracted/live/*.xml",
-    "#{Settings.data}/transformed/live/:guid.xml",
-);
-
-# Update the 'In-Progress' documents
-tc.update(
-    "#{Settings.data}/extracted/in-progress/*.xml",
-    "#{Settings.data}/transformed/in-progress/:guid.xml",
 );
