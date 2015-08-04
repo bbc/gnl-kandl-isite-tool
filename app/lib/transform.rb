@@ -22,7 +22,12 @@ class Transform
 
     def update(source, destination)
         if File.directory? @xslPath
-            xsls = Dir.glob("#{@xslPath}/*.xsl").sort #TODO: handle no XSLs found in dir
+            xsls = Dir.glob("#{@xslPath}/*.xsl").sort
+
+            if xsls.empty?
+                $stderr.puts " => ERROR: No XSL transforms found in '#{@xslPath}'."
+                exit 1
+            end
 
             fh = FileHandler.new
             destinationDir = File.dirname(destination)
