@@ -6,7 +6,7 @@ module Settings
     @project = nil;
     @xslpath = nil;
     @threads = 20;
-    @input = nil;
+    @inputpath = nil;
     @pemFile = '/etc/pki/klunified.pem';
     @proxyHost = nil;
     @proxyPort = nil;
