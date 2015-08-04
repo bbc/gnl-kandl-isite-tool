@@ -3,31 +3,51 @@
 require 'nokogiri';
 
 require_relative 'file-handler'
+require_relative 'xml-handler'
 
 class Transform
-    attr_reader :xsl
+    attr_reader :xslpath
 
-    def initialize(xslFile = '')
+    def initialize(xslPath = '')
         puts "Preparing to transform documents..."
         puts "================================================="
 
-        if not File.exists? xslFile
-            $stderr.puts " => ERROR: File '#{xslFile}' does not exist."
+        if not File.exists? xslPath
+            $stderr.puts " => ERROR: File or directory '#{xslPath}' does not exist."
             exit 1
         else
-            puts " => using xsl: #{xslFile}"
-            @xsl = IO.read(xslFile);
+            @xslPath = xslPath
         end
     end
 
     def update(source, destination)
-        Dir.glob(source) do |sourceFile|
-            guid = File.basename(sourceFile, '.xml');
+        if File.directory? @xslPath
+            xsls = Dir.glob("#{@xslPath}/*.xsl").sort #TODO: handle no XSLs found in dir
 
+            fh = FileHandler.new
+            destinationDir = File.dirname(destination)
+            Dir.glob(source).each do |sourceFile|
+                fh.copy(sourceFile, destinationDir + "/" + File.basename(sourceFile))
+            end
+
+            xsls.each do |xsl|
+                applyTransform(destinationDir + "/*.xml", destination, xsl)
+            end
+        else
+            applyTransform(source, destination, @xslPath)
+        end
+    end
+
+    def applyTransform(source, destination, xslPath)
+        puts " => using xsl: #{xslPath}"
+        xsl = IO.read(xslPath);
+
+        Dir.glob(source) do |sourceFile|
             xh = XmlHandler.new
             xh.init(IO.read(sourceFile));
-            xh.applyTransformation(@xsl);
+            xh.applyTransformation(xsl);
 
+            guid = File.basename(sourceFile, '.xml');
             destinationPath = destination.gsub(':guid', guid);
 
             fh = FileHandler.new
