@@ -191,11 +191,11 @@ optparse = OptionParser.new do |opts|
         Settings.threads = threads
     end
 
-    opts.on('-i', '--inputpath INPUTPATH', "Path to files in") do |inputpath|
+    opts.on('-i', '--inputpath INPUTPATH', "Path containing XML documents to transform") do |inputpath|
         Settings.inputpath = inputpath
     end
 
-    opts.on('-o', '--output OUTPUTPATH', "Output path") do |outputpath|
+    opts.on('-o', '--output OUTPUTPATH', "Output path for transformed XML documents") do |outputpath|
         Settings.outputpath = outputpath
     end
 
@@ -207,8 +207,16 @@ end
 
 begin
     optparse.parse!
-    # mandatory = ['environment', 'project', 'filetype', 'xslpath']; //TODO
-    mandatory = [];
+
+    mandatoryArgs = Hash.new
+    mandatoryArgs['fetch'] = ['environment', 'project', 'filetype']
+    mandatoryArgs['fetch-and-transform'] = ['environment', 'project', 'filetype', 'xslpath']
+    mandatoryArgs['transform'] = ['inputpath', 'outputpath', 'xslpath']
+    mandatoryArgs['upload'] = mandatoryArgs['fetch']
+
+    command = File.basename($0, File.extname($0))
+
+    mandatory = mandatoryArgs[command]
     # Enforce the presence of the -e, -p and -f switches
     missing = mandatory.select { |param| Settings.module_eval(param).nil? }
     unless missing.empty?
