@@ -106,14 +106,6 @@ module Settings
         return "./data/#{@environment}-environment/#{self.filetype}";
     end
 
-    def self.lightweightListURL
-        return sprintf(
-            'https://api.%s.bbc.co.uk/isite2-api/project/%s/content/lightweight-list',
-            self.environment,
-            self.project
-        );
-    end
-
     def self.metadataURL
         return sprintf(
             'https://api.%s.bbc.co.uk/isite2-api/project/%s/content/:guid/meta',

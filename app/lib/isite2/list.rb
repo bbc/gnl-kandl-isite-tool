@@ -2,64 +2,99 @@
 # -*- encoding : utf-8 -*-
 require 'net/http';
 require 'json';
+require 'logger';
+require 'thread'  # for Mutex
 
+
+# Currently the lightweight-list endpoint is broken because of the number
+# of files within the education project, so this class now uses paginated
+# results from the content-reader API to determine which files to reference.
 class ListContent
-
     def initialize()
-        puts
-        puts "Querying iSite2 for list of document(s)...";
+        @pageSize = 40
+        @totalResults = 0;
+        @guids = []
+
+        puts "Build lightweight-list data file...";
         puts "================================================="
 
-        @cacheFile = "#{Settings.cache}/lightweight-list.json";
+        @sslCert = OpenSSL::X509::Certificate.new(Settings.pemFile)
+        @sslKey = OpenSSL::PKey::RSA.new(Settings.pemFile)
 
-        if not File.file? @cacheFile
-            # There's no local cache file so create the
-            # file by querying iSite2 and saving the result
-            cacheResults();
+        fetchPage(getApiURL(1), true);
+
+        numberOfPages = (@totalResults/@pageSize).ceil
+
+        if numberOfPages > 1
+            urls = []
+
+            2.upto(numberOfPages){ |i|
+                urls << getApiURL(i)
+            }
+
+            fastFetch(urls)
         end
+
+        puts " => #{@totalResults.to_i} #{Settings.filetype} documents are listed"
+        puts " => #{@guids.length} GUIDs have been extracted"
+        puts
     end
 
-    def cacheResults()
-        baseURI = URI.parse(Settings.lightweightListURL);
+    def getApiURL(page)
+        return sprintf(
+            'https://api.%s.bbc.co.uk/isite2-content-reader/content/type?allowNonLive=true&project=%s&type=%s&page=%s&pageSize=%s',
+            Settings.environment,
+            Settings.project,
+            Settings.filetype,
+            page,
+            @pageSize
+        );
+    end
 
-        # create the request
-        Net::HTTP::Proxy(
-            Settings.proxyHost,
-            Settings.proxyPort
-        ).start(
+    def fastFetch(urls)
+        mutex = Mutex.new
+
+        Settings.threads.times.map {
+            Thread.new(urls) do |urls|
+                while url = mutex.synchronize { urls.pop }
+                    fetchPage(url, false)
+                end
+            end
+        }.each(&:join)
+    end
+
+    def fetchPage(url, setTotal)
+        baseURI = URI.parse(url);
+
+        Net::HTTP.start(
             baseURI.host,
             baseURI.port,
             :use_ssl => true,
-            :cert => OpenSSL::X509::Certificate.new(Settings.pemFile),
-            :key => OpenSSL::PKey::RSA.new(Settings.pemFile),
+            :cert => @sslCert,
+            :key => @sslKey,
             :verify_mode => OpenSSL::SSL::VERIFY_NONE
         ) do |http|
-            # make the actual request
-            response = http.request_get(baseURI.request_uri);
+            request = http.request_get(baseURI.request_uri)
 
-            if response.code === '200'
-                results = JSON.parse(response.body);
+            responseXml = request.body.force_encoding('UTF-8')
 
-                fh = FileHandler.new
-                fh.create(@cacheFile, JSON.pretty_generate(results));
+            doc = Nokogiri::XML(responseXml)
+
+            if setTotal === true
+                @totalResults = doc.at_xpath('/xmlns:search/xmlns:metadata/xmlns:totalResults').content.to_f
             end
+
+            mergeGuids(
+                doc.xpath('//r:result/r:metadata/r:guid/text()', 'r' => 'https://production.bbc.co.uk/isite2/contentreader/xml/result')
+            )
         end
     end
 
+    def mergeGuids(guids)
+        (@guids << guids).flatten!
+    end
+
     def extractGUIDs()
-        guids = Array.new;
-
-        results = JSON.parse(IO.read(@cacheFile));
-
-        results["docs"].each do |doc|
-            if doc["type"] === Settings.filetype && doc["deleted"] === false
-                guids << doc["id"];
-            end
-        end
-
-        puts " => #{guids.length.to_s} #{Settings.filetype} documents found"
-        puts
-
-        guids;
+        @guids
     end
 end

@@ -125,6 +125,9 @@ class FilterContent
     def downloadDocuments(url, guids, destination)
         baseURI = URI.parse(url)
 
+        sslCert = OpenSSL::X509::Certificate.new(Settings.pemFile)
+        sslKey = OpenSSL::PKey::RSA.new(Settings.pemFile)
+
         queue = Queue.new
         guids.map { |guid| queue << guid }
 
@@ -134,15 +137,12 @@ class FilterContent
         threads = Settings.threads.times.map do
             Thread.new do
                 # prepare the request
-                Net::HTTP::Proxy(
-                    Settings.proxyHost,
-                    Settings.proxyPort
-                ).start(
+                Net::HTTP.start(
                     baseURI.host,
                     baseURI.port,
                     :use_ssl => true,
-                    :cert => OpenSSL::X509::Certificate.new(Settings.pemFile),
-                    :key => OpenSSL::PKey::RSA.new(Settings.pemFile),
+                    :cert => sslCert,
+                    :key => sslKey,
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE
                 ) do |http|
                     while !queue.empty? && guid = queue.pop

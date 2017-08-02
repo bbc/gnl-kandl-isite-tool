@@ -43,6 +43,9 @@ class ContentMetadata
     def createCachedData(nonCachedGuids)
         baseURI = URI.parse(Settings.metadataURL);
 
+        sslCert = OpenSSL::X509::Certificate.new(Settings.pemFile)
+        sslKey = OpenSSL::PKey::RSA.new(Settings.pemFile)
+
         queue = Queue.new;
         nonCachedGuids.map { |guid| queue << guid }
 
@@ -56,8 +59,8 @@ class ContentMetadata
                     baseURI.host,
                     baseURI.port,
                     :use_ssl => true,
-                    :cert => OpenSSL::X509::Certificate.new(Settings.pemFile),
-                    :key => OpenSSL::PKey::RSA.new(Settings.pemFile),
+                    :cert => sslCert,
+                    :key => sslKey,
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE
                 ) do |http|
                     while !queue.empty? && guid = queue.pop
