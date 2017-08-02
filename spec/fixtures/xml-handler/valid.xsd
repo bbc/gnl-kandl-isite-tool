@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<xs:schema
+    xmlns="https://namespace.com"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+    version="1.0">
+
+    <xs:element name="boo">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="bar"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+</xs:schema>

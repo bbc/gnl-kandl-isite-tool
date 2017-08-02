@@ -57,7 +57,7 @@ class ListContent
             end
         end
 
-        puts " => #{guids.length.to_s} #{Settings.filetype} documents discovered"
+        puts " => #{guids.length.to_s} #{Settings.filetype} documents found"
         puts
 
         guids;

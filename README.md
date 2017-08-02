@@ -87,16 +87,45 @@ the 'published' and 'in progress' states,
 
 Required arguments: environment, project, filetype, xslpath
 
-#### Apply transform(s)
+### Apply transform(s)
 
-To apply one or more transforms to a directory containing XML documents:
+#### Configuration
 
-    $ ruby -I. ./app/transform.rb -i path/to/xml/documents/ -o output/path/ -x path/to/transforms/
+The transform script uses a yml file to setup the required parameters. Doing it in this way means the yml file can be versioned alongside the xsl and xsd for the transform. The benefit of this is that the command is simpler to run and easily reproducible in the future.
 
-This will:
-- update the data using the provided XSLT(s). If the path is a directory, all XSL transforms in directory will be applied in alphanumerically sorted order.
+The YML file should be of the following format:
+```
+filetype:
+source:
+target:
+xsl:
+xsd:
+```
 
-Required arguments: inputpath, outputpath, xslpath
+- `filetype` should match the File Type in iSite that you're looking to transform.
+- `source` is the parent directory where the documents have previously been downloaded to. Use a regular-expression match on sub-directories and filenames.
+- `target` is the parent directory of where you want the transformed documents output to. Use a regular-expression value on sub-directories and filenames so it corresponds to the source directory.
+- `xsl` is the full path to the XSL file you want to use to transform the source documents.
+- `xsd` is the full path to the XSD file you want to use to validate the transformed documents.
+
+An example config is:
+```
+filetype: sg-video-chapter
+source: extracted/**/*.xml
+target: transformed/**/*.xml
+xsl: /mnt/hgfs/workspace/kandlcurriculum/isite2/templates/migrations/sg-video-chapter/001-all-elements-within-a-container/transform.xsl
+xsd: /mnt/hgfs/workspace/kandlcurriculum/isite2/templates/migrations/sg-video-chapter/001-all-elements-within-a-container/schema.xsd
+```
+
+#### The Command
+
+To run the transform
+
+    $ ruby ./transform.rb -e :environment -c :config
+
+where `:environment` is test, stage or live and relates to the environment that the files were obtained from
+  and `:config` is the full path to the yml file as defined above
+
 
 #### Upload
 
