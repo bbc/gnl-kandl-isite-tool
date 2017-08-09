@@ -3,6 +3,7 @@
 require 'fileutils'
 require 'logger'
 require 'nokogiri'
+require 'openssl'
 require 'optparse'
 require 'yaml'
 

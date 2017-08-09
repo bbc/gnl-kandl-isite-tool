@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<study-guide-list xmlns="https://production.bbc.co.uk/isite2/project/education/sg-study-guide-list">
+  <details>
+    <topic-of-study>z78qhyc</topic-of-study>
+  </details>
+  <study-guides>
+    <study-guide>
+      <guide>urn:isite:education:zyr3d2p</guide>
+    </study-guide>
+    <study-guide>
+      <guide>urn:isite:education:z39rq6f</guide>
+    </study-guide>
+    <study-guide>
+      <guide>urn:isite:education:zg842hv</guide>
+    </study-guide>
+    <study-guide>
+      <guide>urn:isite:education:zcwkxnb</guide>
+    </study-guide>
+  </study-guides>
+  <iwonder-guides/>
+  <list-items>
+    <list-item>
+      <file>urn:isite:education:zyr3d2p</file>
+    </list-item>
+    <list-item>
+      <file>urn:isite:education:z39rq6f</file>
+    </list-item>
+    <list-item>
+      <file>urn:isite:education:zg842hv</file>
+    </list-item>
+    <list-item>
+      <file>urn:isite:education:zcwkxnb</file>
+    </list-item>
+  </list-items>
+</study-guide-list>

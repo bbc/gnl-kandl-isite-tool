@@ -67,8 +67,7 @@ To download Study Guide list files from the test environment:
     $ ruby -I. ./app/fetch.rb -e test -p education -f sg-study-guide-list
 
 This will:
-- download all the Study Guide lists from the test environment, in both
-the 'published' and 'in progress' states,
+- download all the Study Guide lists from the test environment, in both the 'published' and 'in progress' states,
 - place the new content in a directory for upload
 
 Required arguments: environment, project, filetype
@@ -127,17 +126,17 @@ where `:environment` is test, stage or live and relates to the environment that 
   and `:config` is the full path to the yml file as defined above
 
 
-#### Upload
+### Uploading and Publishing
 
 To upload the amended Study Guide list files to the test environment:
 
-    $ ruby -I. ./app/upload.rb -e test -p education -f sg-study-guide-list
+    $ ruby ./upload.rb -e test -p education -f sg-study-guide-list
 
 Required arguments: environment, project, filetype
 
 ## Tests
 
 To run the tests:
-```
-$ rspec
-```
+
+    $ rspec
+

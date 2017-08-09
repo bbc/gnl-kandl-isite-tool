@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 # -*- encoding : utf-8 -*-
-require 'optparse';
-require 'set';
+require 'openssl'
+require 'optparse'
+require 'set'
 
 # This object is populated with default values for the command-line options,
 # which can then be over-ridden if the user specifies these values.
@@ -18,14 +19,13 @@ require_relative 'lib/isite2/metadata'
 require_relative 'lib/isite2/unpublish'
 require_relative 'lib/isite2/delete'
 require_relative 'lib/isite2/upload'
-require_relative 'lib/isite2/publish'
 
 # Retrieve a list of guids from iSite2 for the filetype we're targetting
-listFiles = ListContent.new;
-iSiteGUIDs = listFiles.extractGUIDs();
+listFiles = ListContent.new
+iSiteGUIDs = listFiles.extractGUIDs()
 
 # Determine the status of each document
-documentStatus = ContentMetadata.new(iSiteGUIDs);
+documentStatus = ContentMetadata.new(iSiteGUIDs)
 
 # Sort all the documents into the appropriate sub-directory
 # and download any required files
@@ -33,10 +33,10 @@ filterFiles = FilterContent.new(
     documentStatus.getPublishedDocuments(),
     documentStatus.getInProgressDocuments(),
     './export/content'
-);
+)
 filterFiles.extractLiveDocuments(
     "#{Settings.data}/extracted/live/:guid.xml"
-);
+)
 filterFiles.extractInProgressDocuments(
     "#{Settings.data}/extracted/in-progress/:guid.xml"
-);
+)

@@ -1,0 +1,234 @@
+{
+  "creationDateTime": "2014-09-02T07:41:07.131Z",
+  "lastPublishedDateTime": "2015-08-27T09:43:37.173Z",
+  "valid": true,
+  "firstPublishedDateTime": "2014-09-02T10:33:11.498Z",
+  "fileIdDuplicated": false,
+  "status": "Published",
+  "modifiedBy": {
+    "email": "duncan.mcdonald@bbc.co.uk",
+    "subject": "/emailAddress=duncan.mcdonald@bbc.co.uk/CN=Duncan McDonald/OU=BBC - News And Knowledge/O=British Broadcasting Corporation/L=Glasgow/C=GB",
+    "name": "Duncan McDonald",
+    "uuid": "ff7f1ae6-f2bf-460e-8d25-13d8ac0dac6e"
+  },
+  "links": {
+    "contents": [
+      {
+        "creationDateTime": "2015-04-21T10:15:47.935Z",
+        "valid": true,
+        "status": "Published",
+        "modifiedBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishable": false,
+        "type": {
+          "id": "sg-study-guide",
+          "previewXPath": "concat(//meta:productionGatewayUrlPrefix, '/education/guides/', //ns:study-guide/ns:id, '?preview=true')",
+          "titleXPath": "/ns:study-guide/ns:title",
+          "fileIdXPath": "/ns:study-guide/ns:id",
+          "documentsCount": 1753,
+          "description": "A collection of chapters form a study guide.",
+          "name": "Study Guide",
+          "contentAuthorRestricted": false,
+          "defaultEditor": "orbeon"
+        },
+        "uri": "/project/education/content/d8a7214a-c1b5-452f-b979-caf20700d8a4",
+        "version": 2,
+        "id": "d8a7214a-c1b5-452f-b979-caf20700d8a4",
+        "fileId": "z39rq6f",
+        "title": "Culture",
+        "createdBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishedVersion": 2,
+        "permissions": {
+          "can_publish": true,
+          "can_view": true,
+          "can_edit": true,
+          "can_delete": true
+        },
+        "linkStatus": "OK",
+        "modifiedDateTime": "2015-05-01T14:18:27.604Z",
+        "live": true
+      },
+      {
+        "creationDateTime": "2015-04-21T10:17:34.063Z",
+        "valid": true,
+        "status": "Published",
+        "modifiedBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishable": false,
+        "type": {
+          "id": "sg-study-guide",
+          "previewXPath": "concat(//meta:productionGatewayUrlPrefix, '/education/guides/', //ns:study-guide/ns:id, '?preview=true')",
+          "titleXPath": "/ns:study-guide/ns:title",
+          "fileIdXPath": "/ns:study-guide/ns:id",
+          "documentsCount": 1753,
+          "description": "A collection of chapters form a study guide.",
+          "name": "Study Guide",
+          "contentAuthorRestricted": false,
+          "defaultEditor": "orbeon"
+        },
+        "uri": "/project/education/content/99349ea4-c372-4b8a-9c67-f5712dcf3e35",
+        "version": 2,
+        "id": "99349ea4-c372-4b8a-9c67-f5712dcf3e35",
+        "fileId": "zcwkxnb",
+        "title": "Employability",
+        "createdBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishedVersion": 2,
+        "permissions": {
+          "can_publish": true,
+          "can_view": true,
+          "can_edit": true,
+          "can_delete": true
+        },
+        "linkStatus": "OK",
+        "modifiedDateTime": "2015-05-01T14:21:21.062Z",
+        "live": true
+      },
+      {
+        "creationDateTime": "2015-04-21T10:20:19.357Z",
+        "valid": true,
+        "status": "Published",
+        "modifiedBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishable": false,
+        "type": {
+          "id": "sg-study-guide",
+          "previewXPath": "concat(//meta:productionGatewayUrlPrefix, '/education/guides/', //ns:study-guide/ns:id, '?preview=true')",
+          "titleXPath": "/ns:study-guide/ns:title",
+          "fileIdXPath": "/ns:study-guide/ns:id",
+          "documentsCount": 1753,
+          "description": "A collection of chapters form a study guide.",
+          "name": "Study Guide",
+          "contentAuthorRestricted": false,
+          "defaultEditor": "orbeon"
+        },
+        "uri": "/project/education/content/250044fc-3f83-42b5-8c7d-e10c410d3bfe",
+        "version": 2,
+        "id": "250044fc-3f83-42b5-8c7d-e10c410d3bfe",
+        "fileId": "zg842hv",
+        "title": "Learning",
+        "createdBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishedVersion": 2,
+        "permissions": {
+          "can_publish": true,
+          "can_view": true,
+          "can_edit": true,
+          "can_delete": true
+        },
+        "linkStatus": "OK",
+        "modifiedDateTime": "2015-05-01T14:25:21.254Z",
+        "live": true
+      },
+      {
+        "creationDateTime": "2015-04-21T10:16:47.146Z",
+        "valid": true,
+        "status": "Published",
+        "modifiedBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishable": false,
+        "type": {
+          "id": "sg-study-guide",
+          "previewXPath": "concat(//meta:productionGatewayUrlPrefix, '/education/guides/', //ns:study-guide/ns:id, '?preview=true')",
+          "titleXPath": "/ns:study-guide/ns:title",
+          "fileIdXPath": "/ns:study-guide/ns:id",
+          "documentsCount": 1753,
+          "description": "A collection of chapters form a study guide.",
+          "name": "Study Guide",
+          "contentAuthorRestricted": false,
+          "defaultEditor": "orbeon"
+        },
+        "uri": "/project/education/content/c6d25990-5cd0-4744-ae90-af83e19a9928",
+        "version": 2,
+        "id": "c6d25990-5cd0-4744-ae90-af83e19a9928",
+        "fileId": "zyr3d2p",
+        "title": "Society",
+        "createdBy": {
+          "email": "sean.carroll@bbc.co.uk",
+          "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+          "name": "Sean Carroll",
+          "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+        },
+        "publishedVersion": 2,
+        "permissions": {
+          "can_publish": true,
+          "can_view": true,
+          "can_edit": true,
+          "can_delete": true
+        },
+        "linkStatus": "OK",
+        "modifiedDateTime": "2015-05-01T14:18:50.556Z",
+        "live": true
+      }
+    ]
+  },
+  "type": {
+    "id": "sg-study-guide-list",
+    "previewXPath": "",
+    "titleXPath": "concat('Study Guide List for ', /ns:study-guide-list/ns:details/ns:topic-of-study)",
+    "fileIdXPath": "/ns:study-guide-list/ns:details/ns:topic-of-study",
+    "documentsCount": 667,
+    "description": "Show a list of Study guides which are mapped to a topic-of-study in the order which it makes most (educational) sense to learn them.",
+    "name": "List",
+    "contentAuthorRestricted": false,
+    "defaultEditor": "orbeon"
+  },
+  "uri": "/project/education/content/0ed7cf93-acf7-4081-88ff-27ffe10ffc6c?version=11",
+  "version": 11,
+  "id": "0ed7cf93-acf7-4081-88ff-27ffe10ffc6c",
+  "fileId": "z78qhyc",
+  "title": "Study Guide List for z78qhyc",
+  "createdBy": {
+    "email": "sean.carroll@bbc.co.uk",
+    "subject": "/emailAddress=sean.carroll@bbc.co.uk/CN=Sean Carroll/OU=BBC - FMT - Nations and Regions/O=British Broadcasting Corporation/L=London/C=GB",
+    "name": "Sean Carroll",
+    "uuid": "123c9193-073d-40e7-b78f-9b99fe35b5e8"
+  },
+  "publishedVersion": 11,
+  "permissions": {
+    "can_publish": true,
+    "can_view": true,
+    "can_edit": true,
+    "can_delete": true
+  },
+  "lastOpened": {
+    "dateTime": "",
+    "user": {
+      "email": "",
+      "subject": "",
+      "name": "",
+      "uuid": ""
+    }
+  },
+  "modifiedDateTime": "2015-08-27T09:30:31.402Z",
+  "live": true
+}
