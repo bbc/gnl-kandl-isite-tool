@@ -85,7 +85,7 @@ class PublishService
             response = http.send_request(
                 'PUT',
                 baseURI.request_uri,
-                publishData.to_s,
+                publishData.to_json,
                 {'Content-Type' =>'application/json'}
             )
 

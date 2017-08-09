@@ -149,7 +149,7 @@ describe 'Publishing in iSite2 via the API:' do
         version = 12
 
         stub_request(:put, 'https://api.other.bbc.co.uk/isite2-api/project/name/content/publish')
-            .with(:body => mockJson(guid, version).to_s, :headers => {'Content-Type'=>'application/json'})
+            .with(:body => mockJson(guid, version).to_json, :headers => {'Content-Type'=>'application/json'})
             .to_return(:status => 200, :body => "", :headers => {})
 
         ps = PublishService.new(Settings, console, Logger.new(nil))
@@ -171,7 +171,7 @@ describe 'Publishing in iSite2 via the API:' do
         version = 12
 
         stub_request(:put, 'https://api.other.bbc.co.uk/isite2-api/project/name/content/publish')
-            .with(:body => mockJson(guid, version).to_s, :headers => {'Content-Type'=>'application/json'})
+            .with(:body => mockJson(guid, version).to_json, :headers => {'Content-Type'=>'application/json'})
             .to_return(:status => 500, :body => "", :headers => {})
 
         ps = PublishService.new(Settings, console, Logger.new(nil))
