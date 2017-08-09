@@ -44,7 +44,7 @@ uploadFiles.process("#{Settings.data}/upload/live/*.xml")
 publish = PublishService.new(Settings, console, publishLog)
 publish.source("#{Settings.data}/upload/live/*.xml")
 publish.start()
-publish.publishRequests()
+publish.prepareRequests()
 
 # Finally send up the files that are in-progress
 uploadFiles.process("#{Settings.data}/upload/in-progress/*.xml")

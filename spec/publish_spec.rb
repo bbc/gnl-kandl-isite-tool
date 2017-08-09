@@ -14,14 +14,6 @@ module Settings
         return 'https://api.other.bbc.co.uk/isite2-api/project/name/content/publish'
     end
 
-    def self.proxyHost
-        nil
-    end
-
-    def self.proxyPort
-        nil
-    end
-
     def self.pemFile
         @pemFile = nil
     end

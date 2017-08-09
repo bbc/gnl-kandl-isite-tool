@@ -114,10 +114,7 @@ class ThingId
         threads = Settings.threads.times.map do
             Thread.new do
                 # prepare the request
-                Net::HTTP::Proxy(
-                    Settings.proxyHost,
-                    Settings.proxyPort
-                ).start(
+                Net::HTTP.start(
                     baseURI.host,
                     baseURI.port,
                     :use_ssl => true,

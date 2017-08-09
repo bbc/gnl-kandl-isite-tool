@@ -69,8 +69,8 @@ class PublishService
         connection.use_ssl = true
 
         unless Settings.pemFile.nil?
-            connection.cert = OpenSSL::X509::Certificate.new(Settings.pemFile),
-            connection.key = OpenSSL::PKey::RSA.new(Settings.pemFile),
+            connection.cert = OpenSSL::X509::Certificate.new(Settings.pemFile)
+            connection.key = OpenSSL::PKey::RSA.new(Settings.pemFile)
             connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
         end
 

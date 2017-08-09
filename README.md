@@ -23,8 +23,7 @@ the editorial teams managing the data.
 
 ### Notice
 
-At the moment the script assumes that you are on reith, the connections expect
-to go through the proxy.
+The script will only work *off the reith network*.
 
 
 ## Location

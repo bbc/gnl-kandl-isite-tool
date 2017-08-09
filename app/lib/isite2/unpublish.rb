@@ -50,10 +50,7 @@ class ISiteAPI
     def unpublishDocuments()
         baseURI = URI.parse(Settings.unPublishURL);
 
-        Net::HTTP::Proxy(
-            Settings.proxyHost,
-            Settings.proxyPort
-        ).start(
+        Net::HTTP.start(
             baseURI.host,
             baseURI.port,
             :use_ssl => true,
@@ -81,9 +78,6 @@ class ISiteAPI
                 if response.code === '200'
                     # responseJSON = JSON.parse(response.body);
                     puts " => Success";
-                elsif response.code === '502'
-                    puts " => Error due to proxy."
-                    #sendRequest(json, batchCount, batchTotal)
                 else
                     #puts JSON.generate(json).to_s
                     #puts response.body
@@ -104,10 +98,7 @@ class ISiteAPI
         threads = Settings.threads.times.map do
             Thread.new do
                 # prepare the request
-                Net::HTTP::Proxy(
-                    Settings.proxyHost,
-                    Settings.proxyPort
-                ).start(
+                Net::HTTP.start(
                     baseURI.host,
                     baseURI.port,
                     :use_ssl => true,

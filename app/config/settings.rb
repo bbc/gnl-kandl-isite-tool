@@ -8,17 +8,6 @@ module Settings
     @threads = 20;
     @inputpath = nil;
     @pemFile = '/etc/pki/klunified.pem';
-    @proxyHost = nil;
-    @proxyPort = nil;
-
-    def self.setProxy()
-        if File.exist? '/var/tmp/reithproxies'
-            if File.read('/var/tmp/reithproxies').include? 'on'
-                @proxyHost = 'www-cache.reith.bbc.co.uk';
-                @proxyPort = 80;
-            end
-        end
-    end
 
     def self.filetype=(v)
         @filetype=v;
@@ -82,14 +71,6 @@ module Settings
 
     def self.pemFile
         return File.read(@pemFile);
-    end
-
-    def self.proxyHost
-        return @proxyHost;
-    end
-
-    def self.proxyPort
-        return @proxyPort;
     end
 
     def self.cache
@@ -222,6 +203,3 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
     puts optparse
     exit
 end
-
-# automatically pick up the reithproxy settings from the sandbox
-Settings.setProxy();
