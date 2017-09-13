@@ -23,7 +23,7 @@ class FileFinder
         elsif File.file?(@source)
             @results << getFileDetails(filename)
         else
-            raise ArgumentError, 'Unable to find specified source: #{@source}'
+            raise ArgumentError, "Unable to find specified source: #{@source}"
         end
 
         @console.info " => Identified #{@results.count.to_s} document(s)"

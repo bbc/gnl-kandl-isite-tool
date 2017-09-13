@@ -13,7 +13,7 @@ class ContentTransformer
     end
 
     def process()
-        logFile = "./data/#{@config['environment']}-environment/#{@config['filetype']}/.logs/transforms.log"
+        logFile = "./data/#{@config[:environment]}-environment/#{@config[:filetype]}/.logs/transforms.log"
 
         @console.info "Transforming documents..."
         @console.info "================================================="
@@ -21,7 +21,7 @@ class ContentTransformer
         applyXsl()
 
         @console.info " => #{@transformedCount} document(s) were transformed"
-        if @config.has_key?('xsd')
+        if @config.has_key?(:xsd)
             @console.info "    => #{@validCount} document(s) passed validation"
             @console.info "    => #{@invalidCount} document(s) failed validation"
         end
@@ -40,13 +40,13 @@ class ContentTransformer
             documentXML.read(document[:source])
 
             # Update the XML to the desired format
-            documentXML.transform(@config['xsl'])
+            documentXML.transform(@config[:xsl])
 
-            if @config.has_key?('xsd')
+            if @config.has_key?(:xsd)
                 # Output details of any file that doesn't match the schema.
                 # Note this doesn't stop the invalid xml file from being created but it does
                 # provide detailed information about why the document isn't valid
-                if !documentXML.validate(@config['xsd'])
+                if !documentXML.validate(@config[:xsd])
                     documentXML.logErrors(
                         @log,
                         "XSD VALIDATION ERROR\n => #{document[:target]}"

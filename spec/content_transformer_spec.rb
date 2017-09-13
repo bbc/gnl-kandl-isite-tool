@@ -19,8 +19,8 @@ describe 'Transform Content' do
         }];
 
         config = {};
-        config['xsl'] = './spec/fixtures/xml-handler/valid.xsl';
-        config['xsd'] = './spec/fixtures/xml-handler/valid.xsd';
+        config[:xsl] = './spec/fixtures/xml-handler/valid.xsl';
+        config[:xsd] = './spec/fixtures/xml-handler/valid.xsd';
 
         transformations = ContentTransformer.new(documents, config, '', console);
         expect {
@@ -47,10 +47,10 @@ describe 'Transform Content' do
         }];
 
         config = {};
-        config['environment'] = 'local';
-        config['filetype'] = 'some-type';
-        config['xsl'] = './spec/fixtures/xml-handler/invalid.xsl';
-        config['xsd'] = './spec/fixtures/xml-handler/valid.xsd';
+        config[:environment] = 'local';
+        config[:filetype] = 'some-type';
+        config[:xsl] = './spec/fixtures/xml-handler/invalid.xsl';
+        config[:xsd] = './spec/fixtures/xml-handler/valid.xsd';
 
         transformations = ContentTransformer.new(documents, config, '', console);
         expect {
@@ -72,8 +72,8 @@ describe 'Transform Content' do
         }];
 
         config = {};
-        config['xsl'] = './spec/fixtures/xml-handler/valid.xsl';
-        config['xsd'] = './spec/fixtures/xml-handler/valid.xsd';
+        config[:xsl] = './spec/fixtures/xml-handler/valid.xsl';
+        config[:xsd] = './spec/fixtures/xml-handler/valid.xsd';
 
         transformations = ContentTransformer.new(documents, config, '', Logger.new(nil));
         expect {
