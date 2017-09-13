@@ -89,40 +89,40 @@ Required arguments: environment, project, filetype, xslpath
 
 #### Configuration
 
-The transform script uses a yml file to setup the required parameters. Doing it in this way means the yml file can be versioned alongside the xsl and xsd for the transform. The benefit of this is that the command is simpler to run and easily reproducible in the future.
+Transform directories should live in a filetype subdirectory of the project's template migrations directory. `{project}/isite2/templates/migrations/{filetype}/`
 
-The YML file should be of the following format:
+Each transform directory must start with a unique number and a dash, e.g. `003-convert-foo-to-bar` and contain the following files:
+
 ```
-filetype:
+transform.yml
+transform.xsl
+schema.xsd
+```
+
+The transform script uses a yml file to setup the transform source and target pattern. The benefit of this is that the command is simpler to run and easily reproducible in the future.
+
+The file should be of the following format:
+
+```
 source:
 target:
-xsl:
-xsd:
 ```
-
-- `filetype` should match the File Type in iSite that you're looking to transform.
 - `source` is the parent directory where the documents have previously been downloaded to. Use a regular-expression match on sub-directories and filenames.
 - `target` is the parent directory of where you want the transformed documents output to. Use a regular-expression value on sub-directories and filenames so it corresponds to the source directory.
-- `xsl` is the full path to the XSL file you want to use to transform the source documents.
-- `xsd` is the full path to the XSD file you want to use to validate the transformed documents.
 
-An example config is:
-```
-filetype: sg-video-chapter
-source: extracted/**/*.xml
-target: transformed/**/*.xml
-xsl: /mnt/hgfs/workspace/kandlcurriculum/isite2/templates/migrations/sg-video-chapter/001-all-elements-within-a-container/transform.xsl
-xsd: /mnt/hgfs/workspace/kandlcurriculum/isite2/templates/migrations/sg-video-chapter/001-all-elements-within-a-container/schema.xsd
-```
+
 
 #### The Command
 
 To run the transform
 
-    $ ruby ./transform.rb -e :environment -c :config
+    $ ruby ./transform.rb -p :project -f filetype -e :environment -t :transformNumber
 
-where `:environment` is test, stage or live and relates to the environment that the files were obtained from
-  and `:config` is the full path to the yml file as defined above
+where:
+ - `:project` is `education` or `guides` and relates to the kandl repository
+ - `:filetype` is the template filetype to transform
+ - `:environment` is `test`, `stage` or `live` and relates to the environment that the files were obtained from
+ - `:transformNumber` is an integer value corresponding to the transform directory prefix
 
 
 ### Uploading and Publishing
@@ -138,4 +138,3 @@ Required arguments: environment, project, filetype
 To run the tests:
 
     $ rspec
-

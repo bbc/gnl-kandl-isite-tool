@@ -13,14 +13,16 @@ require_relative 'lib/options'
 require_relative 'lib/xml-handler'
 
 
+@config = ConfigLoader.get_transform_config()
+
 # Allow for a custom log and use this to store the details
 # of any issues when validating the content
 
 baseDirectory = "./data/#{@config['environment']}-environment/#{@config['filetype']}"
 
 logDirectory = "#{baseDirectory}/.logs/"
-sourcePath = "#{baseDirectory}/#{@config['source']}"
-targetPath = "#{baseDirectory}/#{@config['target']}"
+sourcePath = "#{baseDirectory}/#{@config[:source]}"
+targetPath = "#{baseDirectory}/#{@config[:target]}"
 
 FileUtils.mkdir_p(logDirectory) unless File.exists?(logDirectory)
 

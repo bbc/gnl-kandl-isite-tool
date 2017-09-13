@@ -1,0 +1,3 @@
+invalid yaml
+source: extracted/**/*.xml
+target: transformed/**/*.xml

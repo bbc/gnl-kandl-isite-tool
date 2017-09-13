@@ -1,0 +1,2 @@
+source: /:environment/:filetype/extracted/**/*.xml
+target: /:environment/:filetype/transformed/**/*.xml

@@ -1,4 +1,5 @@
 $:<< File.join(File.dirname(__FILE__), '..')
+require 'rspec-parameterized'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
