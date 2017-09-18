@@ -186,6 +186,7 @@ begin
     mandatoryArgs['fetch-and-transform'] = ['environment', 'project', 'filetype', 'xslpath']
     mandatoryArgs['transform'] = ['inputpath', 'outputpath', 'xslpath']
     mandatoryArgs['upload'] = mandatoryArgs['fetch']
+    mandatoryArgs['filter'] = ['environment', 'project', 'filetype']
 
     command = File.basename($0, File.extname($0))
 

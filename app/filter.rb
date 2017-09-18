@@ -12,9 +12,9 @@ require_relative 'lib/file-handler'
 
 # If the downloaded file and the transformed file are the same then there's
 # no point in re-uploading the file
-Dir.glob("#{Settings.data}/updated/**/*.xml") do |updatedFile|
-    extractedFile = updatedFile.gsub('/updated/', '/extracted/');
-    uploadFile = updatedFile.gsub('/updated/', '/upload/');
+Dir.glob("#{Settings.data}/transformed/**/*.xml") do |updatedFile|
+    extractedFile = updatedFile.gsub('/transformed/', '/extracted/');
+    uploadFile = updatedFile.gsub('/transformed/', '/upload/');
 
     if File.file?(extractedFile)
         if FileUtils.compare_file(extractedFile, updatedFile) === false
