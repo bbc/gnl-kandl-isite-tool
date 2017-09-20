@@ -7,6 +7,8 @@ class ContentTransformer
         @config = config
         @console = console
 
+        @sourceValidCount = 0
+        @sourceInvalidCount = 0
         @transformedCount = 0
         @validCount = 0
         @invalidCount = 0
@@ -22,8 +24,10 @@ class ContentTransformer
 
         @console.info " => #{@transformedCount} document(s) were transformed"
         if @config.has_key?(:xsd)
-            @console.info "    => #{@validCount} document(s) passed validation"
-            @console.info "    => #{@invalidCount} document(s) failed validation"
+            @console.info "    => #{@sourceValidCount} source document(s) passed validation before transformation"
+            @console.info "    => #{@sourceInvalidCount} source document(s) failed validation before transformation"
+            @console.info "    => #{@validCount} document(s) passed validation after transformation"
+            @console.info "    => #{@invalidCount} document(s) failed validation after transformation"
         end
         if @invalidCount > 0
             @console.info "      => #{logFile} has more detailed information."
@@ -38,6 +42,14 @@ class ContentTransformer
 
             # Open the Source XML
             documentXML.read(document[:source])
+
+            if @config.has_key?(:xsd)
+                if documentXML.validate(@config[:xsd])
+                    @sourceValidCount += 1
+                else
+                    @sourceInvalidCount += 1
+                end
+            end
 
             # Update the XML to the desired format
             documentXML.transform(@config[:xsl])
