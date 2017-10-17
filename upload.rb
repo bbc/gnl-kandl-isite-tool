@@ -19,6 +19,8 @@ logDirectory = sprintf(
     Settings.filetype
 )
 
+FileUtils.mkdir_p(logDirectory) unless File.exists?(logDirectory)
+
 console = Logger.new(STDOUT)
 console.formatter = proc do |severity, datetime, progname, msg|
     "#{msg}\n"

@@ -34,13 +34,18 @@ describe 'Publishing in iSite2 via the API:' do
         expect(ps.guids).to match_array(['00460ae7-468e-509e-ab0e-3973da02e9cd'])
     end
 
-    it 'will abort if source file can not be found' do
-        ps = PublishService.new(Settings, Logger.new(nil), Logger.new(nil))
+    it 'displays a warning if source file can not be found' do
+        console = Logger.new(STDOUT)
+        console.formatter = proc do |severity, datetime, progname, msg|
+            "#{msg}\n"
+        end
+
+        ps = PublishService.new(Settings, console, Logger.new(nil))
         ps.source('spec/fixtures/upload/public/_00460ae7-468e-509e-ab0e-3973da02e9cd.xml')
 
         expect {
             ps.start()
-        }.to raise_error(SystemExit)
+        }.to output(/WARNING: Unable to find specified source/).to_stdout_from_any_process
     end
 
     it 'can process all the files within a directory' do
@@ -68,13 +73,18 @@ describe 'Publishing in iSite2 via the API:' do
         ])
     end
 
-    it 'will abort if source directory can not be found' do
-        ps = PublishService.new(Settings, Logger.new(nil), Logger.new(nil))
+    it 'displays a warning if source directory can not be found' do
+        console = Logger.new(STDOUT)
+        console.formatter = proc do |severity, datetime, progname, msg|
+            "#{msg}\n"
+        end
+
+        ps = PublishService.new(Settings, console, Logger.new(nil))
         ps.source('spec/fixtures/upload/live/*.xml')
 
         expect {
             ps.start()
-        }.to raise_error(SystemExit)
+        }.to output(/WARNING: Unable to find specified source/).to_stdout_from_any_process
     end
 
     it 'informs the user how when there is a single document to be published' do

@@ -30,7 +30,7 @@ class PublishService
         elsif File.file?(@src)
             @guids << File.basename(@src, '.xml')
         else
-            abort(" => Unable to find specified source: #{@src}")
+            @console.info " => WARNING: Unable to find specified source: #{@src}"
         end
 
         # Provide some feedback to the user in case the number don't
