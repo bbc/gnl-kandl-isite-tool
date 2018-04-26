@@ -7,7 +7,7 @@ module Settings
     @xslpath = nil;
     @threads = 20;
     @inputpath = nil;
-    @pemFile = '/etc/pki/klunified.pem';
+    @pemFile = '/etc/pki/certificate.pem';
 
     def self.filetype=(v)
         @filetype=v;
