@@ -43,7 +43,7 @@ describe 'Transform Content' do
                          "\n    => 1 source document(s) failed validation before transformation"\
                          "\n    => 0 document(s) passed validation after transformation"\
                          "\n    => 1 document(s) failed validation after transformation"\
-                         "\n      => ./data/local-environment/some-type/.logs/transforms.log has more detailed information.\n\n";
+                         "\n      => ./data/local-environment/projectName/some-type/.logs/transforms.log has more detailed information.\n\n";
 
         documents = [{
             :source => './spec/fixtures/xml-handler/source.xml',
@@ -51,6 +51,7 @@ describe 'Transform Content' do
         }];
 
         config = {};
+        config[:project] = 'projectName';
         config[:environment] = 'local';
         config[:filetype] = 'some-type';
         config[:xsl] = './spec/fixtures/xml-handler/invalid.xsl';
@@ -75,7 +76,7 @@ describe 'Transform Content' do
                          "\n    => 0 source document(s) failed validation before transformation"\
                          "\n    => 0 document(s) passed validation after transformation"\
                          "\n    => 1 document(s) failed validation after transformation"\
-                         "\n      => ./data/local-environment/some-type/.logs/transforms.log has more detailed information.\n\n";
+                         "\n      => ./data/local-environment/projectName/some-type/.logs/transforms.log has more detailed information.\n\n";
 
         documents = [{
             :source => './spec/fixtures/xml-handler/source.xml',
@@ -83,6 +84,7 @@ describe 'Transform Content' do
         }];
 
         config = {};
+        config[:project] = 'projectName';
         config[:environment] = 'local';
         config[:filetype] = 'some-type';
         config[:xsl] = './spec/fixtures/xml-handler/invalid.xsl';

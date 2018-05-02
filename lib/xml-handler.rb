@@ -20,9 +20,15 @@ class XmlHandler
         end
     end
 
-    def transform(xslSource=nil)
+    def transform(xslSource=nil, projectName=nil)
         if File.file?(xslSource)
-            xslt = Nokogiri::XSLT(IO.read(xslSource))
+            xsltContents = IO.read(xslSource)
+
+            if !projectName.nil?
+                xsltContents = xsltContents.gsub('/project/blocks/', "/project/#{projectName}/")
+            end
+
+            xslt = Nokogiri::XSLT(xsltContents)
         else
             abort(" => Unable to read xsl: #{xslSource}")
         end
@@ -32,9 +38,16 @@ class XmlHandler
         )
     end
 
-    def validate(xsdSource=nil)
+    def validate(xsdSource=nil, projectName=nil)
         if File.file?(xsdSource)
-            xsd = Nokogiri::XML::Schema(IO.read(xsdSource))
+            xsdContents = IO.read(xsdSource)
+
+            if !projectName.nil?
+                xsdContents = xsdContents.gsub('/project/blocks/', "/project/#{projectName}/")
+                xsdContents = xsdContents.gsub('urn:isite:blocks:', "urn:isite:#{projectName}:")
+            end
+
+            xsd = Nokogiri::XML::Schema(xsdContents)
         elsif xsdSource.is_a? String
             abort(" => Unable to read xsd: #{xsdSource}")
         end

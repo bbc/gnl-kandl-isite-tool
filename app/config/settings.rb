@@ -84,7 +84,7 @@ module Settings
     end
 
     def self.data
-        return "./data/#{@environment}-environment/#{self.filetype}";
+        return "./data/#{@environment}-environment/#{@project}/#{self.filetype}";
     end
 
     def self.metadataURL

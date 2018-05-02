@@ -50,8 +50,8 @@ module ConfigLoader
 
         # Ensure the command-line options are appropriate
         begin
-            unless /(education|guides)/.match(config[:project])
-                abort('Project must be one of curriculum or guides.')
+            unless /^(education|guides|blocks(-[a-zA-Z]+){0,})$/.match(config[:project])
+                abort('Project must be curriculum, guides or a Blocks project.')
             end
 
             if config[:filetype].nil?
@@ -75,6 +75,10 @@ module ConfigLoader
             'education' => 'kandlcurriculum',
             'guides' => 'kandlguides'
         }
+
+        if /^blocks(-[a-zA-Z]+){0,}$/.match?(config[:project])
+            project_dirs[config[:project]] = 'blocks'
+        end
 
         base_path = "../#{project_dirs[config[:project]]}/isite2/templates/migrations/#{config[:filetype]}"
 

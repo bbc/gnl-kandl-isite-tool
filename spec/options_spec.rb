@@ -28,7 +28,11 @@ describe 'getting config from command line' do
         where(:project) do
             [
                 ['education'],
-                ['guides']
+                ['guides'],
+                ['blocks'],
+                ['blocks-bitesize'],
+                ['blocks-food'],
+                ['blocks-terrific-scientific']
             ]
         end
 
@@ -154,7 +158,7 @@ describe 'getting config from command line' do
     def expect_project_error
         expect {
           ConfigLoader.get_config_from_command_line()
-        }.to raise_error(SystemExit, /Project must be one of curriculum or guides\./)
+        }.to raise_error(SystemExit, /Project must be curriculum, guides or a Blocks project\./)
     end
 
     private

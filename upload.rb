@@ -14,8 +14,9 @@ require_relative 'app/lib/xml-handler'
 require_relative 'lib/service/isite2/publish'
 
 logDirectory = sprintf(
-    "./data/%s-environment/%s/.logs/",
+    "./data/%s-environment/%s/%s/.logs/",
     Settings.environment,
+    Settings.project,
     Settings.filetype
 )
 

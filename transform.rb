@@ -18,7 +18,7 @@ require_relative 'lib/xml-handler'
 # Allow for a custom log and use this to store the details
 # of any issues when validating the content
 
-baseDirectory = "./data/#{@config[:environment]}-environment/#{@config[:filetype]}"
+baseDirectory = "./data/#{@config[:environment]}-environment/#{@config[:project]}/#{@config[:filetype]}"
 
 logDirectory = "#{baseDirectory}/.logs/"
 sourcePath = "#{baseDirectory}/#{@config[:source]}"
