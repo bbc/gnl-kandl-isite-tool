@@ -24,19 +24,21 @@ require_relative 'lib/isite2/upload'
 listFiles = ListContent.new
 iSiteGUIDs = listFiles.extractGUIDs()
 
-# Determine the status of each document
-documentStatus = ContentMetadata.new(iSiteGUIDs)
+if iSiteGUIDs.length > 0
+    # Determine the status of each document
+    documentStatus = ContentMetadata.new(iSiteGUIDs)
 
-# Sort all the documents into the appropriate sub-directory
-# and download any required files
-filterFiles = FilterContent.new(
-    documentStatus.getPublishedDocuments(),
-    documentStatus.getInProgressDocuments(),
-    './export/content'
-)
-filterFiles.extractLiveDocuments(
-    "#{Settings.data}/extracted/live/:guid.xml"
-)
-filterFiles.extractInProgressDocuments(
-    "#{Settings.data}/extracted/in-progress/:guid.xml"
-)
+    # Sort all the documents into the appropriate sub-directory
+    # and download any required files
+    filterFiles = FilterContent.new(
+        documentStatus.getPublishedDocuments(),
+        documentStatus.getInProgressDocuments(),
+        './export/content'
+    )
+    filterFiles.extractLiveDocuments(
+        "#{Settings.data}/extracted/live/:guid.xml"
+    )
+    filterFiles.extractInProgressDocuments(
+        "#{Settings.data}/extracted/in-progress/:guid.xml"
+    )
+end

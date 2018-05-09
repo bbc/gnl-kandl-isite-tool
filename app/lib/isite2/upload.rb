@@ -121,6 +121,8 @@ class UploadContent
         threads.each(&:join);
 
         puts "    => #{successCount.to_s} document(s) were uploaded";
-        puts "    => #{failureCount.to_s} document(s) failed to upload";
+        if failureCount > 0
+            puts "    => #{failureCount.to_s} document(s) failed to upload";
+        end
     end
 end
