@@ -7,12 +7,14 @@ else
     exit
 fi
 
-if [ -d "$HOME/workspace/blocks/isite2/forms/$ENVIRONMENT/documenttype/$2" ]; then
+FILE_TYPE_PATH="$HOME/workspace/blocks/isite2/forms/$ENVIRONMENT/documenttype/$2"
+
+if [ -d "$FILE_TYPE_PATH" ]; then
     # Control will enter here if $DIRECTORY exists.
     FILETYPE=$2
 else
     echo "Could not find the specified filetype with the iSite project files."
-    echo "$HOME/workspace/blocks/isite2/forms/$ENVIRONMENT/documenttype/$2"
+    echo "$FILE_TYPE_PATH"
     exit
 fi
 
@@ -40,13 +42,11 @@ do
     ruby ./app/fetch.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE}
 
     if [ -d "$BASE_DIRECTORY/extracted" ]; then
-        ruby ./transform.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE} -t 001
-
-        cp -r "${BASE_DIRECTORY}/transformed/" "${BASE_DIRECTORY}/upload/"
-        if [ ! -d "${BASE_DIRECTORY}/upload/" ]; then
-            echo "${BASE_DIRECTORY}/upload/ not created"
-        fi
-
-        ruby ./upload.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE}
+        ruby ./transform.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE} -t 002
+        ruby ./filter.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE}
     fi
+
+    # if [ -d "$BASE_DIRECTORY/upload" ]; then
+    #     ruby ./upload.rb -e ${ENVIRONMENT} -p ${project} -f ${FILETYPE}
+    # fi
 done

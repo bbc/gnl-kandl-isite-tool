@@ -9,7 +9,6 @@ require_relative '../file-handler'
 class UploadContent
 
     def process(directory)
-        puts directory;
         files = Array.new
 
         Dir.glob("#{directory}") do |filename|
