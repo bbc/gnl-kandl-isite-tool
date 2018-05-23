@@ -34,7 +34,7 @@ class XmlHandler
         end
 
         setDocument(
-            xslt.transform(@document).to_s
+            xslt.transform(@document, ["projectName", "'#{projectName}'"]).to_s
         )
     end
 
