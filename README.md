@@ -138,3 +138,29 @@ Required arguments: environment, project, filetype
 To run the tests:
 
     $ rspec
+
+## Custom Scripts
+
+There is a custom script in place to support the migration of content for the Blocks project, and all it's child projects.
+
+You should call it like this:
+```
+$ sh ./scripts/blocks.sh -f :filetype -e :environment -t :transformNumber
+```
+where:
+ - `:filetype` is the isite filetype to transform
+ - `:environment` is `test` or `live` and relates to the environment that is being targeted
+ - `:transformNumber` is:
+   - an integer value corresponding to the transform directory prefix
+   - an integer spread corresponding to the series of transforms you wish to apply
+
+Example of calling a single transform:
+```
+$ sh ./scripts/blocks.sh -f article -e test -t 16
+```
+
+Example of calling a series of transforms:
+```
+$ sh ./scripts/blocks.sh -f article -e test -t 12..16
+```
+
