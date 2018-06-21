@@ -133,6 +133,16 @@ To upload the amended Study Guide list files to the test environment:
 
 Required arguments: environment, project, filetype
 
+
+### Unpublishing and Deleteing
+
+To unpublish and delete a filetype from a specified environment:
+
+    $ ruby ./app/remove.rb -e test -p education -f sg-study-guide-list
+
+Required arguments: environment, project, filetype
+
+
 ## Tests
 
 To run the tests:

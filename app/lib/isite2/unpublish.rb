@@ -13,7 +13,7 @@ class ISiteAPI
 
     def createJSON(guids)
         puts "#{guids.length} documents to be un-published";
-        batches = guids.each_slice(100)
+        batches = guids.each_slice(1)
 
         batchTotal = batches.count;
         batchCount = 0;

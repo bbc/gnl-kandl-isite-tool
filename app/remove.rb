@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 # -*- encoding : utf-8 -*-
-require 'optparse';
-require 'set';
+require 'openssl'
+require 'optparse'
+require 'set'
 
 # This object is populated with default values for the command-line options,
 # which can then be over-ridden if the user specifies these values.
@@ -23,16 +24,15 @@ require_relative 'lib/isite2/upload'
 listFiles = ListContent.new;
 targetGUIDs = listFiles.extractGUIDs();
 
+# Example of determining GUIDs from a file instead of targetting a filetype
+# targetGUIDs = File.readlines("narrative.txt").each{|line| line.chomp!}
+
 # Determine the status of each document
 documentStatus = ContentMetadata.new(targetGUIDs);
 
-# deletableDocuments = DeleteContent.new(targetGUIDs);
-# #deletableDocuments.delete();
-# deletableDocuments.permanent();
-
-# #
-# iSiteFiles = ISiteAPI.new;
-# iSiteFiles.unpublish(
-#     documentStatus.getPublishedDocuments()
-# );
-# # iSiteFiles.delete(targetGUIDs);
+#
+iSiteFiles = ISiteAPI.new;
+iSiteFiles.unpublish(
+    documentStatus.getPublishedDocuments()
+);
+iSiteFiles.delete(targetGUIDs);

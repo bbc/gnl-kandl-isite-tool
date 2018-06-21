@@ -184,6 +184,7 @@ begin
     mandatoryArgs = Hash.new
     mandatoryArgs['fetch'] = ['environment', 'project', 'filetype']
     mandatoryArgs['fetch-and-transform'] = ['environment', 'project', 'filetype', 'xslpath']
+    mandatoryArgs['remove'] = mandatoryArgs['fetch']
     mandatoryArgs['transform'] = ['inputpath', 'outputpath', 'xslpath']
     mandatoryArgs['upload'] = mandatoryArgs['fetch']
     mandatoryArgs['filter'] = ['environment', 'project', 'filetype']
