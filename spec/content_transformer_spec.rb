@@ -9,11 +9,10 @@ describe 'Transform Content' do
 
         expectedOutput = "Transforming documents..."\
                          "\n================================================="\
-                         "\n => 1 document(s) were transformed"\
-                         "\n    => 0 source document(s) passed validation before transformation"\
-                         "\n    => 1 source document(s) failed validation before transformation"\
-                         "\n    => 1 document(s) passed validation after transformation"\
-                         "\n    => 0 document(s) failed validation after transformation\n\n";
+                         "\n => 1 document transformed"\
+                         "\n    => 0 documents passed validation before transformation"\
+                         "\n    => 1 document failed validation before transformation"\
+                         "\n\e[32m    => 1 document passed validation after transformation\e[0m\n\n";
 
         documents = [{
             :source => './spec/fixtures/xml-handler/source.xml',
@@ -38,11 +37,11 @@ describe 'Transform Content' do
 
         expectedOutput = "Transforming documents..."\
                          "\n================================================="\
-                         "\n => 1 document(s) were transformed"\
-                         "\n    => 0 source document(s) passed validation before transformation"\
-                         "\n    => 1 source document(s) failed validation before transformation"\
-                         "\n    => 0 document(s) passed validation after transformation"\
-                         "\n    => 1 document(s) failed validation after transformation"\
+                         "\n => 1 document transformed"\
+                         "\n    => 0 documents passed validation before transformation"\
+                         "\n    => 1 document failed validation before transformation"\
+                         "\n\e[32m    => 0 documents passed validation after transformation\e[0m"\
+                         "\n\e[31m    => 1 document failed validation after transformation\e[0m"\
                          "\n      => ./data/local-environment/projectName/some-type/.logs/transforms.log has more detailed information.\n\n";
 
         documents = [{
@@ -71,11 +70,11 @@ describe 'Transform Content' do
 
         expectedOutput = "Transforming documents..."\
                          "\n================================================="\
-                         "\n => 1 document(s) were transformed"\
-                         "\n    => 1 source document(s) passed validation before transformation"\
-                         "\n    => 0 source document(s) failed validation before transformation"\
-                         "\n    => 0 document(s) passed validation after transformation"\
-                         "\n    => 1 document(s) failed validation after transformation"\
+                         "\n => 1 document transformed"\
+                         "\n    => 1 document passed validation before transformation"\
+                         "\n    => 0 documents failed validation before transformation"\
+                         "\n\e[32m    => 0 documents passed validation after transformation\e[0m"\
+                         "\n\e[31m    => 1 document failed validation after transformation\e[0m"\
                          "\n      => ./data/local-environment/projectName/some-type/.logs/transforms.log has more detailed information.\n\n";
 
         documents = [{

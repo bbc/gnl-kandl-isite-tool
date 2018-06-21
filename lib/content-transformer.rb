@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 # -*- encoding : utf-8 -*-
+require 'rainbow/refinement'
+using Rainbow
+
 class ContentTransformer
     def initialize(documents, config, log, console)
         @documents = documents
@@ -14,6 +17,14 @@ class ContentTransformer
         @invalidCount = 0
     end
 
+    def documentCase(documentCount)
+        if documentCount == 1
+            return "#{documentCount} document"
+        end
+
+        return "#{documentCount} documents"
+    end
+
     def process()
         logFile = "./data/#{@config[:environment]}-environment/#{@config[:project]}/#{@config[:filetype]}/.logs/transforms.log"
 
@@ -22,12 +33,14 @@ class ContentTransformer
 
         applyXsl()
 
-        @console.info " => #{@transformedCount} document(s) were transformed"
+        @console.info " => #{documentCase(@transformedCount)} transformed"
         if @config.has_key?(:xsd)
-            @console.info "    => #{@sourceValidCount} source document(s) passed validation before transformation"
-            @console.info "    => #{@sourceInvalidCount} source document(s) failed validation before transformation"
-            @console.info "    => #{@validCount} document(s) passed validation after transformation"
-            @console.info "    => #{@invalidCount} document(s) failed validation after transformation"
+            @console.info "    => #{documentCase(@sourceValidCount)} passed validation before transformation"
+            @console.info "    => #{documentCase(@sourceInvalidCount)} failed validation before transformation"
+            @console.info "    => #{documentCase(@validCount)} passed validation after transformation".green
+            if @invalidCount > 0
+                @console.info "    => #{documentCase(@invalidCount)} failed validation after transformation".red
+            end
         end
         if @invalidCount > 0
             @console.info "      => #{logFile} has more detailed information."

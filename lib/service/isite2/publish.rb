@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 # -*- encoding : utf-8 -*-
+require 'rainbow/refinement'
+using Rainbow
+
 class PublishService
     def initialize(config=nil, console, log)
         @config = config
@@ -33,8 +36,7 @@ class PublishService
             @console.info " => WARNING: Unable to find specified source: #{@src}"
         end
 
-        # Provide some feedback to the user in case the number don't
-        # match what they expect
+        # Provide some feedback in case the numbers don't match the user's expectations
         if @guids.length == 1
             @console.info " => #{@guids.length.to_s} document to be published"
         else
@@ -58,8 +60,14 @@ class PublishService
             end
         }.each(&:join)
 
-        @console.info "    => #{@successCount.to_s} document(s) successfully published"
-        @console.info "    => #{@failureCount.to_s} document(s) were not published"
+        @console.info "    => #{@successCount.to_s} document(s) successfully published".green
+
+        if @failureCount > 1
+            @console.info "    => #{@failureCount.to_s} documents failed to publish".red
+        elsif @failureCount > 0
+            @console.info "    => #{@failureCount.to_s} document failed to publish".red
+        end
+        @console.info ""
     end
 
     def publishDocument(guid)

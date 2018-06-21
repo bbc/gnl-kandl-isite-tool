@@ -190,7 +190,7 @@ describe 'Publishing in iSite2 via the API:' do
 
         expect {
             ps.prepareRequests()
-        }.to output(/1 document\(s\) were not published/).to_stdout_from_any_process
+        }.to output(/1 document failed to publish/).to_stdout_from_any_process
     end
 
     def mockJson(guid, version)
