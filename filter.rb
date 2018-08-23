@@ -13,6 +13,7 @@ require_relative 'app/lib/file-handler'
 # If the downloaded file and the transformed file are the same then there's
 # no point in re-uploading the file
 Dir.glob("#{Settings.data}/transformed/**/*.xml") do |updatedFile|
+    updatedFileRef = updatedFile.gsub("#{Settings.data}/transformed/", '');
     extractedFile = updatedFile.gsub('/transformed/', '/extracted/');
     uploadFile = updatedFile.gsub('/transformed/', '/upload/');
 
@@ -22,6 +23,8 @@ Dir.glob("#{Settings.data}/transformed/**/*.xml") do |updatedFile|
             # into the upload directory
             fh = FileHandler.new
             fh.copy(updatedFile, uploadFile)
+        else
+            puts "    => Ignore: #{updatedFileRef}, 'extracted' and 'transformed' files match"
         end
     end
 end
@@ -31,12 +34,13 @@ end
 # contain any changes
 Dir.glob("#{Settings.data}/upload/live/*.xml") do |publishedFile|
     inProgressFile = publishedFile.sub('/upload/live/', '/upload/in-progress/');
+    inProgressFileRef = inProgressFile.gsub("#{Settings.data}/upload/", '');
 
     if File.file?(inProgressFile)
         if FileUtils.compare_file(publishedFile, inProgressFile) === true
             # The files are the same, so remove the in progress version
             FileUtils.rm(inProgressFile);
-            puts "Removed #{inProgressFile} as the 'in-progress' version is no different from the published version"
+            puts "    => Ignore: #{inProgressFileRef}, 'in-progress' and 'live' files match"
         end
     end
 end

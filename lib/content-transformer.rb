@@ -67,6 +67,16 @@ class ContentTransformer
             # Update the XML to the desired format
             documentXML.transform(@config[:xsl], @config[:project])
 
+            # Allow for sorting of the XML elements to help with
+            # the XMl validation step
+            if @config[:xsl].include? 'transform.xsl'
+                sortXslt = @config[:xsl].gsub('transform.xsl', 'sort.xsl')
+
+                if File.file?(sortXslt)
+                    documentXML.transform(sortXslt, @config[:project])
+                end
+            end
+
             if @config.has_key?(:xsd)
                 # Output details of any file that doesn't match the schema.
                 # Note this doesn't stop the invalid xml file from being created but it does

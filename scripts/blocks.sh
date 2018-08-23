@@ -46,10 +46,13 @@ LAST_TRANSFORM_ID=$(printf "%03d" $LAST_TRANSFORM)
 
 projects=(
     blocks
-    blocks-food
+    blocks-arts
     blocks-bitesize
+    blocks-briefings
     blocks-class-clips-audio
     blocks-class-clips-video
+    blocks-creative
+    blocks-food
     blocks-iwonder
     blocks-live-lessons
     blocks-teach
@@ -98,7 +101,10 @@ do
             fi
         done
 
+        echo 'Prepare documents for upload...'
+        echo '================================================='
         ruby ./filter.rb -e ${ENVIRONMENT} -p ${PROJECT} -f ${FILETYPE}
+        echo ''
     fi
 
     # if [ -d "$BASE_DIRECTORY/upload" ]; then
