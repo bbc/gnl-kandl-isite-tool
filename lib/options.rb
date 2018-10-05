@@ -50,7 +50,7 @@ module ConfigLoader
 
         # Ensure the command-line options are appropriate
         begin
-            unless /^(education|guides|blocks(-[a-zA-Z]+){0,})$/.match(config[:project])
+            unless /^(education|guides|blocks(-[a-zA-Z0-9]+){0,})$/.match(config[:project])
                 abort('Project must be curriculum, guides or a Blocks project.')
             end
 
@@ -76,7 +76,7 @@ module ConfigLoader
             'guides' => 'kandlguides'
         }
 
-        if /^blocks(-[a-zA-Z]+){0,}$/.match?(config[:project])
+        if /^blocks(-[a-zA-Z0-9]+){0,}$/.match?(config[:project])
             project_dirs[config[:project]] = 'blocks'
         end
 

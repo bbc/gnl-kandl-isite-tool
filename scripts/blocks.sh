@@ -49,7 +49,6 @@ projects=(
     blocks-arts
     blocks-bitesize
     blocks-briefings
-    blocks-class-clips-audio
     blocks-class-clips-video
     blocks-creative
     blocks-food
@@ -59,6 +58,7 @@ projects=(
     blocks-ten-pieces
     blocks-terrific-scientific
     blocks-tomorrows-world
+    blocks-under-5s
 )
 
 for PROJECT in "${projects[@]}"
