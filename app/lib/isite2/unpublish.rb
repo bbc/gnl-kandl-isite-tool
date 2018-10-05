@@ -22,7 +22,7 @@ class ISiteAPI
             batchCount += 1;
 
             jsonData = {
-                :description => "Unpublishing documents prior to deleting them",
+                :description => "Unpublishing documents as no longer available on live",
                 :documents => []
             };
 

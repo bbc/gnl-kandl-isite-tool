@@ -52,7 +52,7 @@ class PublishContent
             batchCount += 1;
 
             jsonData = {
-                :description => "Publishing documents that have modified by the K&L Development Team",
+                :description => "Publishing documents to create Creative Works",
                 :documents => []
             };
 

@@ -188,6 +188,8 @@ begin
     mandatoryArgs['transform'] = ['inputpath', 'outputpath', 'xslpath']
     mandatoryArgs['upload'] = mandatoryArgs['fetch']
     mandatoryArgs['filter'] = ['environment', 'project', 'filetype']
+    mandatoryArgs['publish-only'] = ['environment', 'project', 'filetype']
+    mandatoryArgs['unpublish'] = ['environment', 'project', 'filetype']
 
     command = File.basename($0, File.extname($0))
 
