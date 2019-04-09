@@ -185,6 +185,10 @@ optparse = OptionParser.new do |opts|
         Settings.lastModifiedSince = modified
     end
 
+    opts.on('-c', '--certificate PATH', "Path to your certificate file") do |certpath|
+        Settings.pemFile = certpath
+    end
+
     opts.on('-h', '--help', 'Display this screen') do
         puts opts
         exit
