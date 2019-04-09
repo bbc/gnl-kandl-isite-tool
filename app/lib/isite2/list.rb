@@ -84,9 +84,15 @@ class ListContent
                 @totalResults = doc.at_xpath('/xmlns:search/xmlns:metadata/xmlns:totalResults').content.to_f
             end
 
-            mergeGuids(
-                doc.xpath('//r:result/r:metadata/r:guid/text()', 'r' => 'https://production.bbc.co.uk/isite2/contentreader/xml/result')
-            )
+            if Settings.lastModifiedSince
+                mergeGuids(
+                    doc.xpath(sprintf('//r:result/r:metadata[number(translate(substring(child::r:modifiedDateTime, 0, 11), "-", ""))>=%s]/r:guid/text()', Settings.lastModifiedSince), 'r' => 'https://production.bbc.co.uk/isite2/contentreader/xml/result')
+                )
+            else
+                mergeGuids(
+                    doc.xpath('//r:result/r:metadata/r:guid/text()', 'r' => 'https://production.bbc.co.uk/isite2/contentreader/xml/result')
+                )
+            end
         end
     end
 

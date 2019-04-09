@@ -8,6 +8,7 @@ module Settings
     @threads = 20;
     @inputpath = nil;
     @pemFile = '/etc/pki/certificate.pem';
+    @lastModifiedSince = nil;
 
     def self.filetype=(v)
         @filetype=v;
@@ -41,6 +42,10 @@ module Settings
         @pemFile=File.read(v);
     end
 
+    def self.lastModifiedSince=(v)
+        @lastModifiedSince = v
+    end
+
     def self.filetype
         return @filetype;
     end
@@ -71,6 +76,10 @@ module Settings
 
     def self.pemFile
         return File.read(@pemFile);
+    end
+
+    def self.lastModifiedSince
+        return @lastModifiedSince;
     end
 
     def self.cache
@@ -170,6 +179,10 @@ optparse = OptionParser.new do |opts|
 
     opts.on('-o', '--output OUTPUTPATH', "Output path for transformed XML documents") do |outputpath|
         Settings.outputpath = outputpath
+    end
+
+    opts.on('-m', '--modified MODIFIED', Integer, "Only fetch documents modified since YYYYMMDD") do |modified|
+        Settings.lastModifiedSince = modified
     end
 
     opts.on('-h', '--help', 'Display this screen') do
