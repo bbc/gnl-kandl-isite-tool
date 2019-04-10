@@ -39,7 +39,7 @@ module Settings
     end
 
     def self.pemFile=(v)
-        @pemFile=File.read(v);
+        @pemFile = v;
     end
 
     def self.lastModifiedSince=(v)
