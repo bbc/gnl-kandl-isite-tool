@@ -83,7 +83,15 @@ class UploadContent
                             fileContents
                         );
 
-                        if action === 'POST' && response.code === '201'
+                        if action === 'PUT' && response.code === '404'
+                            # We had metadata but the file is not present in iSite
+                            # Try again without the metadata
+                            File.delete(
+                                "#{Settings.cache}/metadata/#{guid}.json"
+                            );
+                            queue.push(filename);
+
+                        elsif action === 'POST' && response.code === '201'
                             successCount += 1;
 
                             results = JSON.parse(response.body);
