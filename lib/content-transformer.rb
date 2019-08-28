@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # -*- encoding : utf-8 -*-
 require 'rainbow/refinement'
+require 'json'
 using Rainbow
 
 class ContentTransformer
@@ -49,6 +50,21 @@ class ContentTransformer
     end
 
     private
+    def generateTransformParams(document)
+        if File.exists?(document[:metadata])
+            metadata = JSON.parse(IO.read(document[:metadata]))
+
+            dateTime = metadata['lastPublishedDateTime']
+            if !dateTime
+                dateTime = metadata['creationDateTime']
+            end
+            return ["modifiedDateTime", dateTime];
+        end
+
+        return []
+    end
+
+    private
     def applyXsl()
         @documents.each { |document|
             documentXML = XmlHandler.new
@@ -65,7 +81,7 @@ class ContentTransformer
             end
 
             # Update the XML to the desired format
-            documentXML.transform(@config[:xsl], @config[:project])
+            documentXML.transform(@config[:xsl], @config[:project], generateTransformParams(document))
 
             # Allow for sorting of the XML elements to help with
             # the XMl validation step
@@ -73,7 +89,7 @@ class ContentTransformer
                 sortXslt = @config[:xsl].gsub('transform.xsl', 'sort.xsl')
 
                 if File.file?(sortXslt)
-                    documentXML.transform(sortXslt, @config[:project])
+                    documentXML.transform(sortXslt, @config[:project], generateTransformParams(document))
                 end
             end
 

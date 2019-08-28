@@ -23,6 +23,7 @@ baseDirectory = "./data/#{@config[:environment]}-environment/#{@config[:project]
 logDirectory = "#{baseDirectory}/.logs/"
 sourcePath = "#{baseDirectory}/#{@config[:source]}"
 targetPath = "#{baseDirectory}/#{@config[:target]}"
+metadataPath = "#{baseDirectory}/.cache/metadata/*"
 
 FileUtils.mkdir_p(logDirectory) unless File.exists?(logDirectory)
 
@@ -39,7 +40,7 @@ end
 
 # Find all the documents with source and also generate
 # the path of the document to be created
-documents = FileFinder.new(sourcePath, targetPath, console)
+documents = FileFinder.new(sourcePath, targetPath, metadataPath, console)
 documents.process()
 
 # Run the XSLT over the documents and log any errors

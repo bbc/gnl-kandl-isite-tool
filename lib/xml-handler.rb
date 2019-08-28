@@ -20,7 +20,7 @@ class XmlHandler
         end
     end
 
-    def transform(xslSource=nil, projectName=nil)
+    def transform(xslSource=nil, projectName=nil, transformParams=nil)
         if File.file?(xslSource)
             xsltContents = IO.read(xslSource)
 
@@ -33,8 +33,13 @@ class XmlHandler
             abort(" => Unable to read xsl: #{xslSource}")
         end
 
+        unquotedParams = ["projectName", projectName]
+        if transformParams
+            unquotedParams += transformParams
+        end
+        
         setDocument(
-            xslt.transform(@document, ["projectName", "'#{projectName}'"]).to_s
+            xslt.transform(@document, Nokogiri::XSLT.quote_params(unquotedParams)).to_s
         )
     end
 

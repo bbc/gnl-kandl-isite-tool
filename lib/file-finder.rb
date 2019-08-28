@@ -2,9 +2,10 @@
 # -*- encoding : utf-8 -*-
 
 class FileFinder
-    def initialize(source=nil, target=nil, console)
+    def initialize(source=nil, target=nil, metadataFolder=nil, console)
         @source = source
         @target = target
+        @metadataFolder = metadataFolder
         @console = console
         @results = []
     end
@@ -31,20 +32,26 @@ class FileFinder
     end
 
     def getFileDetails(sourceFilename)
-        fileExtension = File.extname(sourceFilename)
-        guid = File.basename(sourceFilename, fileExtension)
+        sourceFileExtension = File.extname(sourceFilename)
+        guid = File.basename(sourceFilename, sourceFileExtension)
         parentDirectory = File.basename(File.dirname(sourceFilename))
 
         targetFilename = @target.gsub('/**', "/#{parentDirectory}")
         targetFilename = targetFilename.gsub('/*', "/#{guid}")
 
-        if File.extname(targetFilename) != fileExtension
-            targetFilename += fileExtension
+        if File.extname(targetFilename) != sourceFileExtension
+            targetFilename += sourceFileExtension
+        end
+
+        metadataFilename = @metadataFolder.gsub('/*', "/#{guid}")
+        if File.extname(metadataFilename) != ".json"
+            metadataFilename += '.json'
         end
 
         {
             :source => sourceFilename,
-            :target => targetFilename
+            :target => targetFilename,
+            :metadata => metadataFilename
         }
     end
 

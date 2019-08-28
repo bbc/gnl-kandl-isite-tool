@@ -124,6 +124,26 @@ where:
  - `:environment` is `test`, `stage` or `live` and relates to the environment that the files were obtained from
  - `:transformNumber` is an integer value corresponding to the transform directory prefix
 
+## XSLT parameters
+
+The table below documents the additional parameters made available to each XSLT script during the transform process. The values are derived from
+the iSite2 metadata contained in the iSite2 envelope (the outer the XML that the document itself is contained within) unless otherwise stated.
+
+|Parameter|Description|
+|---|---|
+|`modifiedDateTime`|The `modifiedDateTime` is taken directly from the `lastPublishedDateTime`, but if this field doesn't exist or lacks a non-null value, then the `creationDateTime` field is used instead.|
+
+You can make the parameters above accessible by adding the following near the top of your XSLT transform script:
+
+```xml
+<xsl:param name="modifiedDateTime" />
+```
+
+The parameter can then be referenced like so:
+
+```xml
+<xsl:value-of select="$modifiedDateTime"/>
+```
 
 ### Uploading and Publishing
 
