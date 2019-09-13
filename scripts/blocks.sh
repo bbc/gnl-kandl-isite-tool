@@ -46,17 +46,27 @@ LAST_TRANSFORM_ID=$(printf "%03d" $LAST_TRANSFORM)
 
 projects=(
     blocks
+    blocks-archive
     blocks-arts
     blocks-bitesize
     blocks-briefings
+    blocks-bring-the-noise
     blocks-class-clips-video
     blocks-creative
     blocks-food
     blocks-iwonder
     blocks-live-lessons
+    blocks-music
+    blocks-newsletters
+    blocks-queen-elizabeth-ii
+    blocks-school-radio
+    blocks-skillswise
+    blocks-supermovers
     blocks-teach
+    blocks-teacher-support
     blocks-ten-pieces
     blocks-terrific-scientific
+    blocks-tiny-happy-people
     blocks-tomorrows-world
     blocks-under-5s
 )
