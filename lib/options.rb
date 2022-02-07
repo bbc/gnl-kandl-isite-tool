@@ -50,8 +50,8 @@ module ConfigLoader
 
         # Ensure the command-line options are appropriate
         begin
-            unless /^(education|guides|blocks(-[a-zA-Z0-9]+){0,})$/.match(config[:project])
-                abort('Project must be curriculum, guides or a Blocks project.')
+            unless /^(wwverticals|gnlvideoproject|gnflagpoles)$/.match(config[:project])
+                abort('Project must be wwverticals, gnlvideoproject or gnflagpoles.')
             end
 
             if config[:filetype].nil?
