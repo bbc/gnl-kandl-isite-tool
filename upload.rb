@@ -41,13 +41,13 @@ end
 
 # Send up the files that need to be published first
 uploadFiles = UploadContent.new()
-uploadFiles.process("#{Settings.data}/upload/live/*.xml")
+uploadFiles.process("#{Settings.data}/extracted/live/*.xml")
 
 # Then publish those documents
 publish = PublishService.new(Settings, console, publishLog)
-publish.source("#{Settings.data}/upload/live/*.xml")
+publish.source("#{Settings.data}/extracted/live/*.xml")
 publish.start()
 publish.prepareRequests()
 
 # Finally send up the files that are in-progress
-uploadFiles.process("#{Settings.data}/upload/in-progress/*.xml")
+uploadFiles.process("#{Settings.data}/extracted/in-progress/*.xml")
